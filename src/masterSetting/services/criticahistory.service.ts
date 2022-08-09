@@ -1,18 +1,18 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { paginationUsable } from 'src/config/email.validator';
-import { criticalhistory } from '../interface/criticalhistory';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { paginationUsable } from "src/config/email.validator";
+import { criticalhistory } from "../interface/criticalhistory";
 
 @Injectable()
 export class CriticalHistorySevice {
   constructor(
-    @InjectModel('criticalhistory')
-    private readonly criticalHistoryModal: Model<criticalhistory>,
+    @InjectModel("criticalhistory")
+    private readonly criticalHistoryModal: Model<criticalhistory>
   ) {}
 
   async insertCriticalHistory(CriticalHistory: string, status: boolean) {
-    console.log(CriticalHistory, 'iside servie');
+    console.log(CriticalHistory, "iside servie");
     try {
       const newCriticalHistory = new this.criticalHistoryModal({
         CriticalHistory: CriticalHistory,
@@ -22,17 +22,17 @@ export class CriticalHistorySevice {
       await newCriticalHistory.save();
       return newCriticalHistory;
     } catch (error) {
-      throw new NotFoundException('could not insert');
+      throw new NotFoundException("could not insert");
     }
   }
 
   async getAllCriticalHistory(page: number, pageSize: number) {
-    const { limit, skip, search } = paginationUsable(page, pageSize, '');
+    const { limit, skip, search } = paginationUsable(page, pageSize, "");
 
     try {
       const criticalHistoryList = await this.criticalHistoryModal
         .find({})
-        .sort({ CriticalHistory: 'asc', _id: 'desc' })
+        .sort({ CriticalHistory: "asc", _id: "desc" })
         .limit(limit)
         .skip(skip);
 
@@ -48,7 +48,7 @@ export class CriticalHistorySevice {
   async updateCriticalHistory(
     id: string,
     CriticalHistory: string,
-    status: boolean,
+    status: boolean
   ) {
     try {
       const updatedProduct = await this.criticalHistoryModal.findById(id);
@@ -61,7 +61,7 @@ export class CriticalHistorySevice {
       updatedProduct.save();
       return updatedProduct;
     } catch (error) {
-      throw new NotFoundException('Could not found Data');
+      throw new NotFoundException("Could not found Data");
     }
   }
   async getCriticalHistoryByid(id: string) {

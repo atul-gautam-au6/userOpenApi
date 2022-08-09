@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const specializationSchema = new mongoose.Schema(
   {
@@ -18,8 +18,8 @@ const specializationSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'specialization',
-  },
+    collection: "specialization",
+  }
 );
 
 export default specializationSchema;

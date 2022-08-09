@@ -1,18 +1,18 @@
-import { Injectable, UseFilters, UseInterceptors } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { specialization } from '../interface/specialization.interface';
+import { Injectable, UseFilters, UseInterceptors } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { specialization } from "../interface/specialization.interface";
 
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
 export class SpecializationService {
   constructor(
-    @InjectModel('specialization')
-    private readonly specializationModel: Model<specialization>,
+    @InjectModel("specialization")
+    private readonly specializationModel: Model<specialization>
   ) {}
 
   /**
@@ -44,7 +44,7 @@ export class SpecializationService {
         name,
         status,
       },
-      { new: true },
+      { new: true }
     );
     return result;
   }
@@ -72,9 +72,9 @@ export class SpecializationService {
         $match: {
           $expr: {
             $regexMatch: {
-              input: { $toString: '$name' },
+              input: { $toString: "$name" },
               regex: search,
-              options: 'i',
+              options: "i",
             },
           },
         },
@@ -88,34 +88,34 @@ export class SpecializationService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -124,7 +124,7 @@ export class SpecializationService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

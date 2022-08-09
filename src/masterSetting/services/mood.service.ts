@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { paginationUsable } from 'src/config/email.validator';
-import { mood } from '../interface/mood.interface';
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { paginationUsable } from "src/config/email.validator";
+import { mood } from "../interface/mood.interface";
 
 @Injectable()
 export class MoodService {
-  constructor(@InjectModel('mood') private readonly moodModel: Model<mood>) {}
+  constructor(@InjectModel("mood") private readonly moodModel: Model<mood>) {}
   /*
     @desc
         create Mood
@@ -30,7 +30,7 @@ export class MoodService {
         title,
         status,
       },
-      { new: true },
+      { new: true }
     );
 
     return updatedMood;
@@ -65,34 +65,34 @@ export class MoodService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -101,7 +101,7 @@ export class MoodService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

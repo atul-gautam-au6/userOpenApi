@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const cmsSchema = new mongoose.Schema(
   {
@@ -24,8 +24,8 @@ const cmsSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'cms',
-  },
+    collection: "cms",
+  }
 );
 
 export default cmsSchema;

@@ -7,57 +7,57 @@ import {
   Post,
   Put,
   Query,
-} from '@nestjs/common';
+} from "@nestjs/common";
 import {
   ApiBody,
   ApiOperation,
   ApiParam,
   ApiResponse,
   ApiTags,
-} from '@nestjs/swagger';
+} from "@nestjs/swagger";
 
-import { MedicinesService } from '../services/medicines.service';
+import { MedicinesService } from "../services/medicines.service";
 
-@ApiTags('master-setting')
-@Controller('admin')
+@ApiTags("master-setting")
+@Controller("admin")
 export class MedicineController {
   constructor(private readonly MedicineService: MedicinesService) {}
-  @Post('createMedicine')
-  @ApiOperation({ summary: 'create Medicine in this Api' })
+  @Post("createMedicine")
+  @ApiOperation({ summary: "create Medicine in this Api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         MedicineName: {
-          type: 'string',
-          example: 'Paracetemol',
-          description: 'this is the Medicine name',
+          type: "string",
+          example: "Paracetemol",
+          description: "this is the Medicine name",
         },
         Manufacturer: {
-          type: 'string',
-          example: 'Farmson',
-          description: 'Enter the manufacturer name of the medicine',
+          type: "string",
+          example: "Farmson",
+          description: "Enter the manufacturer name of the medicine",
         },
 
         Salt: {
-          type: 'string',
-          example: 'enter the salt name here',
-          description: '',
+          type: "string",
+          example: "enter the salt name here",
+          description: "",
         },
         status: {
-          type: 'boolean',
-          example: 'true/false',
+          type: "boolean",
+          example: "true/false",
         },
       },
     },
   })
   @ApiResponse({
     status: 202,
-    description: 'Medicine Added',
+    description: "Medicine Added",
   })
   @ApiResponse({
     status: 400,
-    description: 'Fields are  Mandatory',
+    description: "Fields are  Mandatory",
   })
   async createMedicine(
     @Body()
@@ -66,25 +66,25 @@ export class MedicineController {
       Manufacturer: string;
       Salt: string;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
-    console.log(data.MedicineName, 'medical condtion Name');
+    console.log(data.MedicineName, "medical condtion Name");
     if (!data.MedicineName) {
       return {
         errorCode: 403,
-        message: 'Medicine Name is Mandatory',
+        message: "Medicine Name is Mandatory",
       };
     }
     if (!data.Manufacturer) {
       return {
         errorCode: 403,
-        message: 'Manufacturer Name is Mandatory',
+        message: "Manufacturer Name is Mandatory",
       };
     }
     if (!data.Salt) {
       return {
         errorCode: 403,
-        message: 'Salt Name is Mandatory',
+        message: "Salt Name is Mandatory",
       };
     }
 
@@ -92,20 +92,20 @@ export class MedicineController {
       data.MedicineName,
       data.Manufacturer,
       data.Salt,
-      data.status,
+      data.status
     );
 
-    console.log(newMedicine, 'new Medical condito ');
+    console.log(newMedicine, "new Medical condito ");
     return {
       successCode: 201,
-      message: 'Medicine Created Scucessfully',
+      message: "Medicine Created Scucessfully",
       list: newMedicine,
     };
   }
-  @Get('getMedicines/getAll')
+  @Get("getMedicines/getAll")
   async getAllMedicines(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number
   ): Promise<Object> {
     const pageOptions = {
       page: newPage || 1,
@@ -113,12 +113,12 @@ export class MedicineController {
     };
     const medicineList = await this.MedicineService.getAllMedicines(
       pageOptions.page,
-      pageOptions.size,
+      pageOptions.size
     );
     if (!medicineList) {
       return {
         successCode: 400,
-        message: 'No Medicines Found',
+        message: "No Medicines Found",
       };
     }
 
@@ -128,45 +128,45 @@ export class MedicineController {
     };
   }
 
-  @Patch('updateMedicine')
-  @ApiOperation({ summary: 'update Medicine from this api' })
+  @Patch("updateMedicine")
+  @ApiOperation({ summary: "update Medicine from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
+          type: "string",
         },
         MedicineName: {
-          type: 'string',
-          example: 'Paracetemol',
-          description: 'this is the Medicine name',
+          type: "string",
+          example: "Paracetemol",
+          description: "this is the Medicine name",
         },
         Manufacturer: {
-          type: 'string',
-          example: 'Farmson',
-          description: 'Enter the manufacturer name of the medicine',
+          type: "string",
+          example: "Farmson",
+          description: "Enter the manufacturer name of the medicine",
         },
 
         Salt: {
-          type: 'string',
-          example: 'enter the salt name here',
-          description: '',
+          type: "string",
+          example: "enter the salt name here",
+          description: "",
         },
         status: {
-          type: 'boolean',
-          example: 'true/false',
+          type: "boolean",
+          example: "true/false",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'Medicine Updated',
+    description: "Medicine Updated",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateMedicine(
     @Body()
@@ -176,40 +176,40 @@ export class MedicineController {
       Manufacturer: string;
       Salt: string;
       status: boolean;
-    },
+    }
   ) {
     const updatedMedicine = await this.MedicineService.updateMedicine(
       data.id,
       data.MedicineName,
       data.Manufacturer,
       data.Salt,
-      data.status,
+      data.status
     );
     return {
       successCode: 200,
-      message: 'Medicine updated',
+      message: "Medicine updated",
       data: updatedMedicine,
     };
   }
-  @Get('medicine/:Id')
-  @ApiOperation({ summary: 'get medicine by id from this api' })
+  @Get("medicine/:Id")
+  @ApiOperation({ summary: "get medicine by id from this api" })
   @ApiParam({
-    name: 'Id',
-    example: 'any',
+    name: "Id",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'Medicine details',
+    description: "Medicine details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
-  async getMedicineById(@Param('Id') Id: string): Promise<Object> {
+  async getMedicineById(@Param("Id") Id: string): Promise<Object> {
     const getMedicine = await this.MedicineService.getMedicineByid(Id);
     return {
       successCode: 200,
-      successMessage: 'Medicine  details',
+      successMessage: "Medicine  details",
       list: getMedicine,
     };
   }

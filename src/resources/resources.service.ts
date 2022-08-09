@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { SentMessageInfo, SendMailOptions } from 'nodemailer';
-import mailjet from 'node-mailjet';
+import { Injectable } from "@nestjs/common";
+import { SentMessageInfo, SendMailOptions } from "nodemailer";
+import mailjet from "node-mailjet";
 
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 @Injectable()
 export class ResourcesService {
@@ -71,13 +71,13 @@ export class ResourcesService {
   async paginationUsable(
     page: number,
     size: number,
-    search: string,
+    search: string
   ): Promise<Object> {
     if (!page || page == 0) {
       page = 1;
     }
     if (!search) {
-      search = '';
+      search = "";
     }
     if (!size || size < 10) {
       size = 10;

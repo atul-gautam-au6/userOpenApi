@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 const medicinesSchema = new mongoose.Schema(
   {
     MedicineName: {
@@ -25,8 +25,8 @@ const medicinesSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'medicines',
-  },
+    collection: "medicines",
+  }
 );
 
 export default medicinesSchema;

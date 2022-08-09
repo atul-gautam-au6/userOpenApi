@@ -1,8 +1,8 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { jwtConstants } from '../constants';
-import { Request } from 'express';
+import { ExtractJwt, Strategy } from "passport-jwt";
+import { PassportStrategy } from "@nestjs/passport";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { jwtConstants } from "../constants";
+import { Request } from "express";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,8 +13,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: `${jwtConstants.secret}`,
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          const data = request?.cookies['auth-cookie'];
-          console.log('token : -', data);
+          const data = request?.cookies["auth-cookie"];
+          console.log("token : -", data);
 
           if (!data) {
             return null;
@@ -27,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: any) {
     if (!payload.isAdmin || payload.isSubAdmin) {
-      throw new UnauthorizedException('You are not admin');
+      throw new UnauthorizedException("You are not admin");
     }
     return { userId: payload.sub, username: payload.username };
   }

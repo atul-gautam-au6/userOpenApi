@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const healthConditionSchema = new mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const healthConditionSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'healthcondition',
-  },
+    collection: "healthcondition",
+  }
 );
 export default healthConditionSchema;

@@ -1,22 +1,22 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { paginationUsable } from 'src/config/email.validator';
-import { Medicines } from '../interface/medicines.interface';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { paginationUsable } from "src/config/email.validator";
+import { Medicines } from "../interface/medicines.interface";
 
 @Injectable()
 export class MedicinesService {
   constructor(
-    @InjectModel('medicines') private readonly MedicinesModal: Model<Medicines>,
+    @InjectModel("medicines") private readonly MedicinesModal: Model<Medicines>
   ) {}
 
   async insertMedicine(
     MedicineName: string,
     Manufacturer: string,
     Salt: string,
-    status: boolean,
+    status: boolean
   ) {
-    console.log(MedicineName, 'iside servie');
+    console.log(MedicineName, "iside servie");
     try {
       const newMedicine = new this.MedicinesModal({
         MedicineName: MedicineName,
@@ -28,16 +28,16 @@ export class MedicinesService {
       await newMedicine.save();
       return newMedicine;
     } catch (error) {
-      throw new NotFoundException('could not insert');
+      throw new NotFoundException("could not insert");
     }
   }
 
   async getAllMedicines(page: number, pageSize: number) {
-    const { limit, skip, search } = paginationUsable(page, pageSize, '');
+    const { limit, skip, search } = paginationUsable(page, pageSize, "");
 
     try {
       const MedicineList = await this.MedicinesModal.find({})
-        .sort({ MedicineName: 'asc', _id: 'desc' })
+        .sort({ MedicineName: "asc", _id: "desc" })
         .limit(limit)
         .skip(skip);
 
@@ -55,7 +55,7 @@ export class MedicinesService {
     MedicineName: string,
     Manufacturer: string,
     Salt: string,
-    status: boolean,
+    status: boolean
   ) {
     try {
       const updatedMedicine = await this.MedicinesModal.findById(id);
@@ -74,7 +74,7 @@ export class MedicinesService {
       updatedMedicine.save();
       return updatedMedicine;
     } catch (error) {
-      throw new NotFoundException('Could not found Data');
+      throw new NotFoundException("Could not found Data");
     }
   }
   async getMedicineByid(id: string) {

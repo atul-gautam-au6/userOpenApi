@@ -4,11 +4,11 @@ export var validateEmail = function (email) {
 };
 
 export const paginationUsable = (page, size, search) => {
-  if (!page || page == '0' || page == 0) {
+  if (!page || page == "0" || page == 0) {
     page = 1;
   }
   if (!search) {
-    search = '';
+    search = "";
   }
   if (!size) {
     size = 10;

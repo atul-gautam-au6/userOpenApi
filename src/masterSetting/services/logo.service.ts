@@ -1,17 +1,17 @@
-import { Injectable, UseFilters, UseInterceptors } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { logo } from '../interface/logo.interface';
+import { Injectable, UseFilters, UseInterceptors } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { logo } from "../interface/logo.interface";
 
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
 export class LogoService {
   constructor(
-    @InjectModel('logo') private readonly serviceModel: Model<logo>,
+    @InjectModel("logo") private readonly serviceModel: Model<logo>
   ) {}
 
   /*
@@ -39,7 +39,7 @@ export class LogoService {
         name,
         status,
       },
-      { new: true },
+      { new: true }
     );
 
     return saveLogo;
@@ -54,7 +54,7 @@ export class LogoService {
   async getLogoById(id: string) {
     const getLogo = await this.serviceModel
       .findById(id)
-      .select('-status -createdAt -updatedAt');
+      .select("-status -createdAt -updatedAt");
 
     return getLogo;
   }
@@ -92,34 +92,34 @@ export class LogoService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -128,7 +128,7 @@ export class LogoService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

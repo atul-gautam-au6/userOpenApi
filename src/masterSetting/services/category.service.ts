@@ -1,17 +1,17 @@
-import { Injectable, UseFilters, UseInterceptors } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { category } from '../interface/category.interface';
+import { Injectable, UseFilters, UseInterceptors } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { category } from "../interface/category.interface";
 
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
 export class CategoryService {
   constructor(
-    @InjectModel('category') private readonly categoryModel: Model<category>,
+    @InjectModel("category") private readonly categoryModel: Model<category>
   ) {}
 
   /**
@@ -26,7 +26,7 @@ export class CategoryService {
     name: string,
     status: boolean,
     isPodcast: boolean,
-    isQuetion: boolean,
+    isQuetion: boolean
   ) {
     const savedCategory = await this.categoryModel.create({
       name,
@@ -50,7 +50,7 @@ export class CategoryService {
     name: string,
     status: boolean,
     isPodcast: boolean,
-    isQuetion: boolean,
+    isQuetion: boolean
   ) {
     const result = await this.categoryModel.findByIdAndUpdate(
       id,
@@ -60,7 +60,7 @@ export class CategoryService {
         isPodcast,
         isQuetion,
       },
-      { new: true },
+      { new: true }
     );
     return result;
   }
@@ -74,7 +74,7 @@ export class CategoryService {
   async getCategoryByid(id: string) {
     const result = await this.categoryModel
       .findById(id)
-      .select('-isQuetion -isPodcast');
+      .select("-isQuetion -isPodcast");
     return result;
   }
 
@@ -89,11 +89,11 @@ export class CategoryService {
     page: number,
     size: number,
     searchKey: string,
-    type: string,
+    type: string
   ) {
     const { limit, skip, search } = paginationUsable(page, size, searchKey);
-    const isPodcast = type == 'isPodcast' ? true : false;
-    const isQuetion = type == 'isQuetion' ? true : false;
+    const isPodcast = type == "isPodcast" ? true : false;
+    const isQuetion = type == "isQuetion" ? true : false;
 
     const result = await this.categoryModel.aggregate([
       {
@@ -103,21 +103,21 @@ export class CategoryService {
               !isPodcast && !isQuetion
                 ? [
                     {
-                      $eq: ['$isPodcast', false],
+                      $eq: ["$isPodcast", false],
                     },
                     {
-                      $eq: ['$isQuetion', false],
+                      $eq: ["$isQuetion", false],
                     },
                   ]
                 : isPodcast
                 ? [
                     {
-                      $eq: ['$isPodcast', true],
+                      $eq: ["$isPodcast", true],
                     },
                   ]
                 : [
                     {
-                      $eq: ['$isQuetion', true],
+                      $eq: ["$isQuetion", true],
                     },
                   ],
           },
@@ -137,9 +137,9 @@ export class CategoryService {
         $match: {
           $expr: {
             $regexMatch: {
-              input: { $toString: '$name' },
+              input: { $toString: "$name" },
               regex: search,
-              options: 'i',
+              options: "i",
             },
           },
         },
@@ -153,34 +153,34 @@ export class CategoryService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -189,7 +189,7 @@ export class CategoryService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

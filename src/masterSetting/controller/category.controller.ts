@@ -10,8 +10,8 @@ import {
   UseFilters,
   UseGuards,
   UseInterceptors,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
 import {
   ApiBody,
   ApiOperation,
@@ -19,25 +19,25 @@ import {
   ApiResponse,
   ApiSecurity,
   ApiTags,
-} from '@nestjs/swagger';
-import { Model } from 'mongoose';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { CategoryService } from '../services/category.service';
-import { category } from '../interface/category.interface';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
+} from "@nestjs/swagger";
+import { Model } from "mongoose";
+import { JwtAuthGuard } from "src/auth/guard/jwt-auth.guard";
+import { CategoryService } from "../services/category.service";
+import { category } from "../interface/category.interface";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
 
-@ApiTags('master-setting')
-@ApiSecurity('bearer')
+@ApiTags("master-setting")
+@ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
-@Controller('admin')
+@Controller("admin")
 export class CategoryController {
   constructor(
-    @InjectModel('category')
+    @InjectModel("category")
     private readonly categoryModel: Model<category>,
-    private readonly categoryService: CategoryService,
+    private readonly categoryService: CategoryService
   ) {}
 
   /*
@@ -47,32 +47,32 @@ export class CategoryController {
       secured by admin
       accept name 
   */
-  @Post('createCategory')
-  @ApiOperation({ summary: 'create category  from this api' })
+  @Post("createCategory")
+  @ApiOperation({ summary: "create category  from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is category name*',
+          type: "string",
+          example: "any",
+          description: "this is category name*",
         },
         status: {
-          type: 'booelan',
+          type: "booelan",
           example: true,
-          description: 'this is status of category*',
+          description: "this is status of category*",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'category create',
+    description: "category create",
   })
   @ApiResponse({
     status: 403,
-    description: 'All field are required',
+    description: "All field are required",
   })
   async createCategory(
     @Body()
@@ -80,23 +80,23 @@ export class CategoryController {
       name: string;
       status: boolean;
       isPodcast: boolean;
-    },
+    }
   ): Promise<Object> {
     if (!data.name || !data.status) {
       return {
         errorCode: 403,
-        errorMessage: 'Name and status fields are required*',
+        errorMessage: "Name and status fields are required*",
       };
     }
     const newCategory = await this.categoryService.insertCategory(
       data.name,
       data.status, //optional
       false, //category for podcats
-      false, // category for question
+      false // category for question
     );
     return {
       successCode: 201,
-      successMessage: 'category create success',
+      successMessage: "category create success",
       list: newCategory,
     };
   }
@@ -108,37 +108,37 @@ export class CategoryController {
       secured by admin
       accept id name status
   */
-  @Put('updateCategory')
-  @ApiOperation({ summary: 'update category  from this api' })
+  @Put("updateCategory")
+  @ApiOperation({ summary: "update category  from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is your category',
+          type: "string",
+          example: "any",
+          description: "this is your category",
         },
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is category name*',
+          type: "string",
+          example: "any",
+          description: "this is category name*",
         },
         status: {
-          type: 'boolean',
+          type: "boolean",
           example: true,
-          description: 'this is status of category*',
+          description: "this is status of category*",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'category update',
+    description: "category update",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateCategory(
     @Body()
@@ -146,18 +146,18 @@ export class CategoryController {
       id: string;
       name: string;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     const getcategory = await this.categoryService.updateCategory(
       data.id,
       data.name,
       data.status,
       false, //category for podcast
-      false, // category for question
+      false // category for question
     );
     return {
       successCode: 200,
-      successMessage: 'category update success',
+      successMessage: "category update success",
       list: getcategory,
     };
   }
@@ -170,27 +170,27 @@ export class CategoryController {
       accept idpodcats
       
   */
-  @Get('category/:categoryId')
-  @ApiOperation({ summary: 'get category by id from this api' })
+  @Get("category/:categoryId")
+  @ApiOperation({ summary: "get category by id from this api" })
   @ApiParam({
-    name: 'categoryId',
-    example: 'any',
+    name: "categoryId",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'category details',
+    description: "category details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
   async getCategoryById(
-    @Param('categoryId') categoryId: string,
+    @Param("categoryId") categoryId: string
   ): Promise<Object> {
     const getCategory = await this.categoryService.getCategoryByid(categoryId);
     return {
       successCode: 200,
-      successMessage: 'category details ',
+      successMessage: "category details ",
       list: getCategory,
     };
   }
@@ -202,32 +202,32 @@ export class CategoryController {
       secured by admin
       accept name 
   */
-  @Post('createCategoryPodcast')
-  @ApiOperation({ summary: 'create category podcast from this api' })
+  @Post("createCategoryPodcast")
+  @ApiOperation({ summary: "create category podcast from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is category podcast name*',
+          type: "string",
+          example: "any",
+          description: "this is category podcast name*",
         },
         isPodcast: {
-          type: 'booelan',
+          type: "booelan",
           example: true,
-          description: 'this is status of category podcast*',
+          description: "this is status of category podcast*",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'category podcast create',
+    description: "category podcast create",
   })
   @ApiResponse({
     status: 403,
-    description: 'All field are required',
+    description: "All field are required",
   })
   async createCategoryPodcast(
     @Body()
@@ -235,17 +235,17 @@ export class CategoryController {
       name: string;
       status: boolean;
       isPodcast: boolean;
-    },
+    }
   ): Promise<Object> {
     const newCategory = await this.categoryService.insertCategory(
       data.name,
       data.status, //optional
       true, //true for podcast category
-      false, // category for question
+      false // category for question
     );
     return {
       successCode: 201,
-      successMessage: 'category podcast create success',
+      successMessage: "category podcast create success",
       list: newCategory,
     };
   }
@@ -257,37 +257,37 @@ export class CategoryController {
           secured by admin
           accept id name status
       */
-  @Put('updateCategoryPodcast')
-  @ApiOperation({ summary: 'update category podcast from this api' })
+  @Put("updateCategoryPodcast")
+  @ApiOperation({ summary: "update category podcast from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is your category podcast',
+          type: "string",
+          example: "any",
+          description: "this is your category podcast",
         },
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is category podcast name*',
+          type: "string",
+          example: "any",
+          description: "this is category podcast name*",
         },
         status: {
-          type: 'boolean',
+          type: "boolean",
           example: true,
-          description: 'this is status of category*',
+          description: "this is status of category*",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'category update',
+    description: "category update",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateCategoryPodcast(
     @Body()
@@ -295,18 +295,18 @@ export class CategoryController {
       id: string;
       name: string;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     const getCategory = await this.categoryService.updateCategory(
       data.id,
       data.name,
       data.status,
       true, //optional
-      false, // category for question
+      false // category for question
     );
     return {
       successCode: 200,
-      successMessage: 'category podcats update success ',
+      successMessage: "category podcats update success ",
       list: getCategory,
     };
   }
@@ -319,27 +319,27 @@ export class CategoryController {
           accept id
           
       */
-  @Get('categoryPodcast/:categoryId')
-  @ApiOperation({ summary: 'get category podcats by id from this api' })
+  @Get("categoryPodcast/:categoryId")
+  @ApiOperation({ summary: "get category podcats by id from this api" })
   @ApiParam({
-    name: 'categoryId',
-    example: 'any',
+    name: "categoryId",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'category podcats details',
+    description: "category podcats details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
   async getCategoryPodcastById(
-    @Param('categoryId') categoryId: string,
+    @Param("categoryId") categoryId: string
   ): Promise<Object> {
     const getCategory = await this.categoryService.getCategoryByid(categoryId);
     return {
       successCode: 200,
-      successMessage: 'category podcats detail  ',
+      successMessage: "category podcats detail  ",
       list: getCategory,
     };
   }
@@ -351,32 +351,32 @@ export class CategoryController {
       secured by admin
       accept name 
   */
-  @Post('createCategoryQuestion')
-  @ApiOperation({ summary: 'create category question from this api' })
+  @Post("createCategoryQuestion")
+  @ApiOperation({ summary: "create category question from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is category question name*',
+          type: "string",
+          example: "any",
+          description: "this is category question name*",
         },
         status: {
-          type: 'booelan',
+          type: "booelan",
           example: true,
-          description: 'this is status of category question*',
+          description: "this is status of category question*",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'category create',
+    description: "category create",
   })
   @ApiResponse({
     status: 403,
-    description: 'All field are required',
+    description: "All field are required",
   })
   async createCategoryQuestion(
     @Req() req,
@@ -384,17 +384,17 @@ export class CategoryController {
     data: {
       name: string;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     const newCategory = await this.categoryService.insertCategory(
       data.name,
       data.status, //optional
       false, //true for podcast category
-      true, // category for question
+      true // category for question
     );
     return {
       successCode: 201,
-      successMessage: 'category question create success',
+      successMessage: "category question create success",
       list: newCategory,
     };
   }
@@ -406,37 +406,37 @@ export class CategoryController {
               secured by admin
               accept id name status
           */
-  @Put('updateCategoryQuestion')
-  @ApiOperation({ summary: 'update category question from this api' })
+  @Put("updateCategoryQuestion")
+  @ApiOperation({ summary: "update category question from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is your category question',
+          type: "string",
+          example: "any",
+          description: "this is your category question",
         },
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is category name question*',
+          type: "string",
+          example: "any",
+          description: "this is category name question*",
         },
         status: {
-          type: 'boolean',
+          type: "boolean",
           example: true,
-          description: 'this is status of category question*',
+          description: "this is status of category question*",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'category update',
+    description: "category update",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateCategoryQuestion(
     @Body()
@@ -444,18 +444,18 @@ export class CategoryController {
       id: string;
       name: string;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     const getCategory = await this.categoryService.updateCategory(
       data.id,
       data.name,
       data.status,
       false, //category for podcast
-      true, // category for question
+      true // category for question
     );
     return {
       successCode: 200,
-      successMessage: 'category question detail',
+      successMessage: "category question detail",
       list: getCategory,
     };
   }
@@ -468,52 +468,52 @@ export class CategoryController {
               accept id
               
           */
-  @Get('categoryQuestion/:categoryId')
-  @ApiOperation({ summary: 'get category question by id from this api' })
+  @Get("categoryQuestion/:categoryId")
+  @ApiOperation({ summary: "get category question by id from this api" })
   @ApiParam({
-    name: 'categoryId',
-    example: 'any',
+    name: "categoryId",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'category question details',
+    description: "category question details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
   async getCategoryQuById(
-    @Param('categoryId') categoryId: string,
+    @Param("categoryId") categoryId: string
   ): Promise<Object> {
     const getCategory = await this.categoryService.getCategoryByid(categoryId);
     return {
       successCode: 200,
-      successMessage: 'category question detail  ',
+      successMessage: "category question detail  ",
       list: getCategory,
     };
   }
 
-  @Get('categories/getAll')
+  @Get("categories/getAll")
   async getAllcategories(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
-    @Query('searchKey') searchKey: string,
-    @Query('type') type: string,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number,
+    @Query("searchKey") searchKey: string,
+    @Query("type") type: string
   ): Promise<Object> {
     const pagination = {
       page: newPage || 1,
       size: pageSize || 10,
-      searchKey: searchKey || '',
+      searchKey: searchKey || "",
     };
     const result = await this.categoryService.getAllCategory(
       pagination.page,
       pagination.size,
       pagination.searchKey,
-      type,
+      type
     );
     return {
       successCod: 200,
-      successMessage: 'all categories list',
+      successMessage: "all categories list",
       list: result,
     };
   }

@@ -15,8 +15,8 @@ import {
   Res,
   BadGatewayException,
   Query,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
 import {
   ApiTags,
   ApiOperation,
@@ -25,29 +25,29 @@ import {
   ApiParam,
   ApiSecurity,
   ApiQuery,
-} from '@nestjs/swagger';
-import { Model } from 'mongoose';
-import { Response } from 'express';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { AuthService } from 'src/auth/services/auth.service';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { LocalAuthGuard } from 'src/auth/guard/local-auth.guard';
-import { user } from '../interfaces/user.interface';
-import { UserService } from '../services/user.service';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { RecaptchaGuard } from 'src/auth/strategy/v3.strategy';
-import { throwError } from 'rxjs';
+} from "@nestjs/swagger";
+import { Model } from "mongoose";
+import { Response } from "express";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { AuthService } from "src/auth/services/auth.service";
+import { JwtAuthGuard } from "src/auth/guard/jwt-auth.guard";
+import { LocalAuthGuard } from "src/auth/guard/local-auth.guard";
+import { user } from "../interfaces/user.interface";
+import { UserService } from "../services/user.service";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { RecaptchaGuard } from "src/auth/strategy/v3.strategy";
+import { throwError } from "rxjs";
 
-@ApiTags('User crud')
-@Controller('admin')
+@ApiTags("User crud")
+@Controller("admin")
 @UseInterceptors(new LoggingInterceptor())
 @UseFilters(new HttpExceptionFilter())
 export class AdminController {
   constructor(
-    @InjectModel('user')
+    @InjectModel("user")
     private readonly userModel: Model<user>,
     private readonly userService: UserService,
-    private readonly authService: AuthService,
+    private readonly authService: AuthService
   ) {}
 
   // /**
@@ -346,47 +346,47 @@ export class AdminController {
 
   // @ApiSecurity('bearer')
   // @UseGuards(JwtAuthGuard)
-  @Post('create-user')
-  @ApiOperation({ summary: 'create user from this api' })
+  @Post("create-user")
+  @ApiOperation({ summary: "create user from this api" })
   // @ApiSecurity('bearer')
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user name *',
+          type: "string",
+          example: "any",
+          description: "this is user name *",
         },
         email: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user email *',
+          type: "string",
+          example: "any",
+          description: "this is user email *",
         },
         phone: {
-          type: 'number',
-          example: 'any',
-          description: 'this is user phone *',
+          type: "number",
+          example: "any",
+          description: "this is user phone *",
         },
         password: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user password *',
+          type: "string",
+          example: "any",
+          description: "this is user password *",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'user create',
+    description: "user create",
   })
   @ApiResponse({
     status: 500,
-    description: 'internal server error',
+    description: "internal server error",
   })
   async createUser(
     @Body()
-    data: { name: string; password: string; email: string; phone: number }, // body of our data
+    data: { name: string; password: string; email: string; phone: number } // body of our data
   ): Promise<Object> {
     const newUser = await this.userService.insertUser(
       data.name,
@@ -394,12 +394,12 @@ export class AdminController {
       data.password,
       false, //true for subadmin
       data.phone,
-      null,
+      null
     );
 
     return {
       successCode: 201,
-      successMessage: 'User create success',
+      successMessage: "User create success",
       list: newUser,
     };
   }
@@ -413,53 +413,53 @@ export class AdminController {
   */
   // @ApiSecurity('bearer')
   // @UseGuards(JwtAuthGuard)
-  @Put('update-user')
-  @ApiOperation({ summary: 'update user from this api' })
+  @Put("update-user")
+  @ApiOperation({ summary: "update user from this api" })
   // @ApiSecurity('bearer')
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user id *',
+          type: "string",
+          example: "any",
+          description: "this is user id *",
         },
         name: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user name *',
+          type: "string",
+          example: "any",
+          description: "this is user name *",
         },
         email: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user email *',
+          type: "string",
+          example: "any",
+          description: "this is user email *",
         },
         phone: {
-          type: 'number',
-          example: 'any',
-          description: 'this is user phone *',
+          type: "number",
+          example: "any",
+          description: "this is user phone *",
         },
         password: {
-          type: 'string',
-          example: 'any',
-          description: 'this is user password *',
+          type: "string",
+          example: "any",
+          description: "this is user password *",
         },
         status: {
-          type: 'boolean',
+          type: "boolean",
           example: true,
-          description: 'this is user status *',
+          description: "this is user status *",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'user update',
+    description: "user update",
   })
   @ApiResponse({
     status: 500,
-    description: 'internal server error',
+    description: "internal server error",
   })
   async updateUser(
     @Body()
@@ -470,7 +470,7 @@ export class AdminController {
       email: string;
       phone: number;
       status: boolean;
-    }, // body of our data
+    } // body of our data
   ): Promise<Object> {
     const newUser = await this.userService.updateUser(
       data.id,
@@ -479,12 +479,12 @@ export class AdminController {
       // data.password,
       false,
       data.phone,
-      data.status,
+      data.status
     );
 
     return {
       successCode: 200,
-      successMessage: 'User update success',
+      successMessage: "User update success",
       list: newUser,
     };
   }
@@ -498,26 +498,26 @@ export class AdminController {
   */
   // @ApiSecurity('bearer')
   // @UseGuards(JwtAuthGuard)
-  @Get('user/:userId')
-  @ApiOperation({ summary: 'get user by id from this api' })
+  @Get("user/:userId")
+  @ApiOperation({ summary: "get user by id from this api" })
   @ApiParam({
-    name: 'userId',
-    example: 'any',
+    name: "userId",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'user details',
+    description: "user details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
-  async getUserById(@Param('userId') userId: string): Promise<Object> {
+  async getUserById(@Param("userId") userId: string): Promise<Object> {
     const newUser = await this.userService.getUserById(userId);
 
     return {
       successCode: 200,
-      successMessage: 'User details',
+      successMessage: "User details",
       list: newUser,
     };
   }
@@ -531,35 +531,35 @@ export class AdminController {
   */
   // @ApiSecurity('bearer')
   // @UseGuards(JwtAuthGuard)
-  @Get('users')
-  @ApiOperation({ summary: 'get user  list from this api' })
+  @Get("users")
+  @ApiOperation({ summary: "get user  list from this api" })
   @ApiResponse({
     status: 200,
-    description: 'user list',
+    description: "user list",
   })
   @ApiResponse({
     status: 500,
-    description: 'server error',
+    description: "server error",
   })
-  async getAllUsers(
-    // @Query('pageSize') pageSize: number,
-    // @Query('newPage') newPage: number,
-    // @Query('searchKey') searchKey: string,
-  ): Promise<Object> {
+  async getAllUsers(): // @Query('pageSize') pageSize: number,
+  // @Query('newPage') newPage: number,
+  // @Query('searchKey') searchKey: string,
+  Promise<Object> {
     // const pagination = {
     //   page: newPage || 1,
     //   size: pageSize || 10,
     //   searchKey: searchKey || '',
     // };
-    const newUser = await this.userService.getAllUsers(
+    const newUser = await this.userService
+      .getAllUsers
       // pagination.page,
       // pagination.size,
       // pagination.searchKey,
-    );
+      ();
 
     return {
       successCode: 200,
-      successMessage: 'User list',
+      successMessage: "User list",
       list: newUser,
     };
   }

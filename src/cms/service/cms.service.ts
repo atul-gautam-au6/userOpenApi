@@ -1,16 +1,16 @@
-import { Injectable, UseFilters, UseInterceptors } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { cms } from '../interface/cms.interface';
+import { Injectable, UseFilters, UseInterceptors } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { cms } from "../interface/cms.interface";
 
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
 export class CmsService {
-  constructor(@InjectModel('cms') private readonly cmsModel: Model<cms>) {}
+  constructor(@InjectModel("cms") private readonly cmsModel: Model<cms>) {}
 
   /**
    * @description   create cms
@@ -38,7 +38,7 @@ export class CmsService {
     id: string,
     name: string,
     description: string,
-    status: boolean,
+    status: boolean
   ) {
     const result = await this.cmsModel.findByIdAndUpdate(
       id,
@@ -47,7 +47,7 @@ export class CmsService {
         description,
         status,
       },
-      { new: true },
+      { new: true }
     );
     return result;
   }
@@ -73,9 +73,9 @@ export class CmsService {
         $match: {
           $expr: {
             $regexMatch: {
-              input: { $toString: '$name' },
+              input: { $toString: "$name" },
               regex: search,
-              options: 'i',
+              options: "i",
             },
           },
         },
@@ -89,34 +89,34 @@ export class CmsService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -125,7 +125,7 @@ export class CmsService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

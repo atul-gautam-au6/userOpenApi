@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const locationSchema = new mongoose.Schema(
   {
@@ -26,8 +26,8 @@ const locationSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'locations',
-  },
+    collection: "locations",
+  }
 );
 
 export default locationSchema;

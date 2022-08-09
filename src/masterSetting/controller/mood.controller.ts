@@ -9,8 +9,8 @@ import {
   Query,
   UploadedFile,
   UseInterceptors,
-} from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import {
   ApiBody,
   ApiConsumes,
@@ -19,12 +19,12 @@ import {
   ApiResponse,
   ApiSecurity,
   ApiTags,
-} from '@nestjs/swagger';
-import { MoodService } from '../services/mood.service';
+} from "@nestjs/swagger";
+import { MoodService } from "../services/mood.service";
 
-@ApiTags('master-setting')
-@ApiSecurity('bearer')
-@Controller('admin')
+@ApiTags("master-setting")
+@ApiSecurity("bearer")
+@Controller("admin")
 export class MoodController {
   constructor(private readonly moodService: MoodService) {}
 
@@ -34,70 +34,70 @@ export class MoodController {
 
   */
 
-  @Post('addMood')
-  @ApiOperation({ summary: 'Create mood from this api' })
-  @ApiConsumes('multipart/form-data')
+  @Post("addMood")
+  @ApiOperation({ summary: "Create mood from this api" })
+  @ApiConsumes("multipart/form-data")
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         title: {
-          type: 'string',
-          example: 'angry',
-          description: 'this is the mood title',
+          type: "string",
+          example: "angry",
+          description: "this is the mood title",
         },
         icon: {
-          type: 'string',
-          format: 'binary',
-          description: 'this is logo image url *',
+          type: "string",
+          format: "binary",
+          description: "this is logo image url *",
         },
         status: {
-          type: 'boolean',
-          example: 'true/false',
+          type: "boolean",
+          example: "true/false",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'mood added',
+    description: "mood added",
   })
   @ApiResponse({
     status: 403,
-    description: 'title and icon is mandatory',
+    description: "title and icon is mandatory",
   })
   @UseInterceptors(
-    FileInterceptor('icon', {
-      dest: 'client/icon/',
+    FileInterceptor("icon", {
+      dest: "client/icon/",
       limits: {
         fieldSize: 10 * 1024 * 1024,
       },
-    }),
+    })
   )
   async addMood(
     @UploadedFile() file,
-    @Body() data: { title: string; icon: string; status: boolean },
+    @Body() data: { title: string; icon: string; status: boolean }
   ): Promise<Object> {
     if (!file?.filename) {
       return {
         errorCode: 500,
-        errorMessage: 'icon is required*',
+        errorMessage: "icon is required*",
       };
     }
     if (!data.title || !data.status) {
       return {
         errorCode: 403,
-        errorMessage: 'title and icon are required',
+        errorMessage: "title and icon are required",
       };
     }
     const newMood = await this.moodService.insertMood(
       data.title,
       file?.filename,
-      data.status,
+      data.status
     );
     return {
       successCode: 201,
-      successMessage: 'Mood created successfully',
+      successMessage: "Mood created successfully",
       list: newMood,
     };
   }
@@ -107,35 +107,35 @@ export class MoodController {
     response will be the list of moods
   */
 
-  @Get('moods')
-  @ApiOperation({ summary: 'get all moods in this api' })
+  @Get("moods")
+  @ApiOperation({ summary: "get all moods in this api" })
   @ApiResponse({
     status: 200,
-    description: 'moods list',
+    description: "moods list",
   })
   @ApiResponse({
     status: 500,
-    description: 'server error',
+    description: "server error",
   })
   async getAllMoods(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
-    @Query('searchKey') searchKey: string,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number,
+    @Query("searchKey") searchKey: string
   ): Promise<Object> {
     const pagination = {
       page: newPage || 1,
       size: pageSize || 10,
-      searchKey: searchKey || '',
+      searchKey: searchKey || "",
     };
     // const pagination={page:1,size:10,search:''}
     const getMoods = await this.moodService.getAllMoods(
       pagination.page,
       pagination.size,
-      pagination.searchKey,
+      pagination.searchKey
     );
     return {
       successCode: 200,
-      successMessage: 'Moods Succesfully retrieved',
+      successMessage: "Moods Succesfully retrieved",
       list: getMoods,
     };
   }
@@ -145,47 +145,47 @@ export class MoodController {
   Admin can update the icon and title of the moods
   
   */
-  @Put('/updateMood')
-  @ApiOperation({ summary: 'update Mood from this api' })
-  @ApiConsumes('multipart/form-data')
+  @Put("/updateMood")
+  @ApiOperation({ summary: "update Mood from this api" })
+  @ApiConsumes("multipart/form-data")
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is mood id*',
+          type: "string",
+          example: "any",
+          description: "this is mood id*",
         },
         logo: {
-          type: 'string',
-          format: 'binary',
-          description: 'this is Mood image url *',
+          type: "string",
+          format: "binary",
+          description: "this is Mood image url *",
         },
 
         status: {
-          type: 'boolean',
+          type: "boolean",
           example: true,
-          description: 'this is Mood status *',
+          description: "this is Mood status *",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'mood updated',
+    description: "mood updated",
   })
   @ApiResponse({
     status: 500,
-    description: 'Internal server error',
+    description: "Internal server error",
   })
   @UseInterceptors(
-    FileInterceptor('logo', {
-      dest: 'client/icon/',
+    FileInterceptor("logo", {
+      dest: "client/icon/",
       limits: {
         fieldSize: 10 * 1024 * 1024,
       },
-    }),
+    })
   )
   async updateLogo(
     @UploadedFile() file,
@@ -194,22 +194,22 @@ export class MoodController {
       id: string;
       icon: string;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     if (!data.id) {
       return {
         errorCode: 500,
-        errorMessage: 'Id is required for update*',
+        errorMessage: "Id is required for update*",
       };
     }
     const updatedMood = await this.moodService.updateMood(
       data.id,
       file?.filename,
-      data.status,
+      data.status
     );
     return {
       successCode: 200,
-      successMessage: 'mood update success',
+      successMessage: "mood update success",
       list: updatedMood,
     };
   }
@@ -219,53 +219,53 @@ export class MoodController {
    it will take the mood id and delete that from the list
    
    */
-  @Delete('/deleteById/:moodId')
-  @ApiOperation({ summary: 'Delete Mood from this api' })
+  @Delete("/deleteById/:moodId")
+  @ApiOperation({ summary: "Delete Mood from this api" })
   @ApiParam({
-    name: 'moodId',
-    example: 'any',
+    name: "moodId",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'mood deleted',
+    description: "mood deleted",
   })
   @ApiResponse({
     status: 500,
-    description: 'Internal server error',
+    description: "Internal server error",
   })
-  async deleteMoodById(@Param('moodId') moodId: string): Promise<Object> {
+  async deleteMoodById(@Param("moodId") moodId: string): Promise<Object> {
     if (!moodId) {
       return {
         errorCode: 500,
-        errorMessage: 'mood id is required*',
+        errorMessage: "mood id is required*",
       };
     }
     const deletedMood = await this.moodService.deleteMood(moodId);
-    console.log(deletedMood, 'deletedMood');
+    console.log(deletedMood, "deletedMood");
     return {
       successCode: 200,
-      successMessage: 'Mood Deleted',
+      successMessage: "Mood Deleted",
     };
   }
-  @Get('mood/:moodId')
-  @ApiOperation({ summary: 'get category question by id from this api' })
+  @Get("mood/:moodId")
+  @ApiOperation({ summary: "get category question by id from this api" })
   @ApiParam({
-    name: 'moodId',
-    example: 'any',
+    name: "moodId",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'Mood details',
+    description: "Mood details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
-  async getMoodId(@Param('moodId') moodId: string): Promise<Object> {
+  async getMoodId(@Param("moodId") moodId: string): Promise<Object> {
     const getMood = await this.moodService.getMoodByid(moodId);
     return {
       successCode: 200,
-      successMessage: 'Mood  detail',
+      successMessage: "Mood  detail",
       list: getMood,
     };
   }

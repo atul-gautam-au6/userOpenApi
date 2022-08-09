@@ -10,8 +10,8 @@ import {
   UseFilters,
   UseGuards,
   UseInterceptors,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
 import {
   ApiBody,
   ApiOperation,
@@ -19,25 +19,25 @@ import {
   ApiResponse,
   ApiSecurity,
   ApiTags,
-} from '@nestjs/swagger';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { location } from '../interface/location.interface';
-import { LocationService } from '../services/location.service';
+} from "@nestjs/swagger";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { JwtAuthGuard } from "src/auth/guard/jwt-auth.guard";
+import { location } from "../interface/location.interface";
+import { LocationService } from "../services/location.service";
 
-@ApiTags('master-setting')
-@ApiSecurity('bearer')
+@ApiTags("master-setting")
+@ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
-@Controller('admin/location')
+@Controller("admin/location")
 export class LocationController {
   constructor(
-    @InjectModel('location')
+    @InjectModel("location")
     private readonly locationModel: Model<location>,
-    private readonly locationService: LocationService,
+    private readonly locationService: LocationService
   ) {}
 
   /**
@@ -46,37 +46,37 @@ export class LocationController {
    * @param data state,city,pincode
    * @returns
    */
-  @Post('createLocation')
-  @ApiOperation({ summary: 'create location from this api' })
+  @Post("createLocation")
+  @ApiOperation({ summary: "create location from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         state: {
-          type: 'string',
-          example: 'any',
-          description: 'this is state name*',
+          type: "string",
+          example: "any",
+          description: "this is state name*",
         },
         city: {
-          type: 'string',
-          example: 'any',
-          description: 'this is city name*',
+          type: "string",
+          example: "any",
+          description: "this is city name*",
         },
         pinCode: {
-          type: 'number',
+          type: "number",
           example: true,
-          description: 'this is pin code*',
+          description: "this is pin code*",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'location create',
+    description: "location create",
   })
   @ApiResponse({
     status: 403,
-    description: 'All field are required',
+    description: "All field are required",
   })
   async createLocation(
     @Body()
@@ -84,17 +84,17 @@ export class LocationController {
       state: string;
       city: string;
       pinCode: number;
-    },
+    }
   ): Promise<Object> {
     const newLocation = await this.locationService.insertLocation(
       data.state,
       data.city,
-      data.pinCode,
+      data.pinCode
     );
 
     return {
       successCode: 201,
-      successMessage: 'locaton create success',
+      successMessage: "locaton create success",
       list: newLocation,
     };
   }
@@ -104,42 +104,42 @@ export class LocationController {
    * @param data id,state,city,pincode,status
    * @returns updated object
    */
-  @Put('updateLocation')
-  @ApiOperation({ summary: 'update location from this api' })
+  @Put("updateLocation")
+  @ApiOperation({ summary: "update location from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is your location id',
+          type: "string",
+          example: "any",
+          description: "this is your location id",
         },
         state: {
-          type: 'string',
-          example: 'any',
-          description: 'this is state name*',
+          type: "string",
+          example: "any",
+          description: "this is state name*",
         },
         city: {
-          type: 'string',
-          example: 'any',
-          description: 'this is city name*',
+          type: "string",
+          example: "any",
+          description: "this is city name*",
         },
         pinCode: {
-          type: 'number',
+          type: "number",
           example: true,
-          description: 'this is pin code*',
+          description: "this is pin code*",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'location create',
+    description: "location create",
   })
   @ApiResponse({
     status: 403,
-    description: 'All field are required',
+    description: "All field are required",
   })
   async updateLocation(
     @Body()
@@ -149,19 +149,19 @@ export class LocationController {
       city: string;
       pinCode: number;
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     const updateLocation = await this.locationService.updateLocation(
       data.id,
       data.state,
       data.city,
       data.pinCode,
-      data.status,
+      data.status
     );
 
     return {
       successCode: 200,
-      successMessage: 'locaton update success',
+      successMessage: "locaton update success",
       list: updateLocation,
     };
   }
@@ -172,48 +172,48 @@ export class LocationController {
    * @param id string
    * @returns location object
    */
-  @Get('getLocation/:id')
-  @ApiOperation({ summary: 'get location by id from this api' })
+  @Get("getLocation/:id")
+  @ApiOperation({ summary: "get location by id from this api" })
   @ApiParam({
-    name: 'id',
-    example: 'any',
+    name: "id",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'location details',
+    description: "location details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
-  async getLocationById(@Param('id') id: string): Promise<Object> {
+  async getLocationById(@Param("id") id: string): Promise<Object> {
     const getLocation = await this.locationService.getLocationById(id);
     return {
       successCode: 200,
-      successMessage: 'get location',
+      successMessage: "get location",
       list: getLocation,
     };
   }
 
-  @Get('getAllLocation')
-  @ApiOperation({ summary: 'get All location  from this api' })
+  @Get("getAllLocation")
+  @ApiOperation({ summary: "get All location  from this api" })
   async getAllLocation(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number
   ): Promise<Object> {
     const pagination = {
       page: newPage || 1,
       size: pageSize || 10,
-      searchKey: '',
+      searchKey: "",
     };
     const result = await this.locationService.getAllLocation(
       pagination.page,
       pagination.size,
-      pagination.searchKey,
+      pagination.searchKey
     );
     return {
       successCod: 200,
-      successMessage: 'all categories list',
+      successMessage: "all categories list",
       list: result,
     };
   }

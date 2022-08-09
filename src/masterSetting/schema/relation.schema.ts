@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const relationSchema = new mongoose.Schema(
   {
@@ -13,7 +13,7 @@ const relationSchema = new mongoose.Schema(
       require: true,
       max: 30,
       trim: true,
-      enum: ['Family', 'Professional', 'Locality'],
+      enum: ["Family", "Professional", "Locality"],
     },
 
     status: {
@@ -24,8 +24,8 @@ const relationSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'relation',
-  },
+    collection: "relation",
+  }
 );
 
 export default relationSchema;

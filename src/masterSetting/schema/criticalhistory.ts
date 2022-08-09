@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const criticalhistorySchema = new mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const criticalhistorySchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'criticalhistory',
-  },
+    collection: "criticalhistory",
+  }
 );
 export default criticalhistorySchema;

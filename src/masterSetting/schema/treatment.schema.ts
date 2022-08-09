@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const TreatmentSchema = new mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const TreatmentSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'Treatment',
-  },
+    collection: "Treatment",
+  }
 );
 export default TreatmentSchema;

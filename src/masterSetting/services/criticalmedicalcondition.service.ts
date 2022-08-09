@@ -1,19 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { paginationUsable } from 'src/config/email.validator';
-import { criticalmedicalcondition } from '../interface/criticalmedicalcondition.interface';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { paginationUsable } from "src/config/email.validator";
+import { criticalmedicalcondition } from "../interface/criticalmedicalcondition.interface";
 
 @Injectable()
 export class criticalmedicalconditionSevice {
   constructor(
-    @InjectModel('criticalmedicalcondition')
-    private readonly criticalMedicalConditionModal: Model<criticalmedicalcondition>,
+    @InjectModel("criticalmedicalcondition")
+    private readonly criticalMedicalConditionModal: Model<criticalmedicalcondition>
   ) {}
 
   async insertCriticalMedicalCondition(
     medicalCondtionName: string,
-    status: boolean,
+    status: boolean
   ) {
     try {
       const newMedicalCondition = new this.criticalMedicalConditionModal({
@@ -24,18 +24,18 @@ export class criticalmedicalconditionSevice {
       await newMedicalCondition.save();
       return newMedicalCondition;
     } catch (error) {
-      throw new NotFoundException('could not insert');
+      throw new NotFoundException("could not insert");
     }
   }
 
   async getAllCriticalMedicalCondition(page: number, pageSize: number) {
-    const { limit, skip, search } = paginationUsable(page, pageSize, '');
+    const { limit, skip, search } = paginationUsable(page, pageSize, "");
 
     try {
       const criticalMedicalcondtionList =
         await this.criticalMedicalConditionModal
           .find({})
-          .sort({ MedicalConditionName: 'asc', _id: 'desc' })
+          .sort({ MedicalConditionName: "asc", _id: "desc" })
           .limit(limit)
           .skip(skip);
 
@@ -51,11 +51,11 @@ export class criticalmedicalconditionSevice {
   async updateMedicalCondition(
     id: string,
     MedicalConditionName: string,
-    status: boolean,
+    status: boolean
   ) {
     try {
       const updatedProduct = await this.criticalMedicalConditionModal.findById(
-        id,
+        id
       );
       if (MedicalConditionName) {
         updatedProduct.MedicalConditionName = MedicalConditionName;
@@ -66,7 +66,7 @@ export class criticalmedicalconditionSevice {
       updatedProduct.save();
       return updatedProduct;
     } catch (error) {
-      throw new NotFoundException('Could not found Data');
+      throw new NotFoundException("Could not found Data");
     }
   }
   async getCriticalMedicalConditionByid(id: string) {

@@ -7,75 +7,75 @@ import {
   Post,
   Put,
   Query,
-} from '@nestjs/common';
+} from "@nestjs/common";
 import {
   ApiBody,
   ApiOperation,
   ApiParam,
   ApiResponse,
   ApiTags,
-} from '@nestjs/swagger';
-import { criticalmedicalconditionSevice } from '../services/criticalmedicalcondition.service';
+} from "@nestjs/swagger";
+import { criticalmedicalconditionSevice } from "../services/criticalmedicalcondition.service";
 
-@ApiTags('master-setting')
-@Controller('admin')
+@ApiTags("master-setting")
+@Controller("admin")
 export class CriticalMedicalConditionController {
   constructor(
-    private readonly criticalMedicalConditonService: criticalmedicalconditionSevice,
+    private readonly criticalMedicalConditonService: criticalmedicalconditionSevice
   ) {}
-  @Post('createCriticalMedicalCondition')
-  @ApiOperation({ summary: 'create medical Condition in this Api' })
+  @Post("createCriticalMedicalCondition")
+  @ApiOperation({ summary: "create medical Condition in this Api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         MedicalConditionName: {
-          type: 'string',
-          example: 'fever',
-          description: 'this is the medical condtion',
+          type: "string",
+          example: "fever",
+          description: "this is the medical condtion",
         },
         status: {
-          type: 'boolean',
-          example: 'true/false',
+          type: "boolean",
+          example: "true/false",
         },
       },
     },
   })
   @ApiResponse({
     status: 202,
-    description: 'Medical Condition Added',
+    description: "Medical Condition Added",
   })
   @ApiResponse({
     status: 400,
-    description: 'Medical condtion Name is required',
+    description: "Medical condtion Name is required",
   })
   async createMedicalCondition(
-    @Body() data: { MedicalConditionName: string; status: boolean },
+    @Body() data: { MedicalConditionName: string; status: boolean }
   ): Promise<Object> {
-    console.log(data.MedicalConditionName, 'medical condtion Name');
+    console.log(data.MedicalConditionName, "medical condtion Name");
     if (!data.MedicalConditionName) {
       return {
         errorCode: 403,
-        message: 'Please Enter Medical Condtion',
+        message: "Please Enter Medical Condtion",
       };
     }
     const newMedicalcondition =
       await this.criticalMedicalConditonService.insertCriticalMedicalCondition(
         data.MedicalConditionName,
-        data.status,
+        data.status
       );
 
-    console.log(newMedicalcondition, 'new Medical condito ');
+    console.log(newMedicalcondition, "new Medical condito ");
     return {
       successCode: 201,
-      message: 'Medical condition Created Scucessfully',
+      message: "Medical condition Created Scucessfully",
       list: newMedicalcondition,
     };
   }
-  @Get('getCriticalMedicalCondition/getAll')
+  @Get("getCriticalMedicalCondition/getAll")
   async getAllCriticalMedicalCondition(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number
   ): Promise<Object> {
     const pageOptions = {
       page: newPage || 1,
@@ -84,12 +84,12 @@ export class CriticalMedicalConditionController {
     const criticalMedicalConditionList =
       await this.criticalMedicalConditonService.getAllCriticalMedicalCondition(
         pageOptions.page,
-        pageOptions.size,
+        pageOptions.size
       );
     if (!criticalMedicalConditionList) {
       return {
         successCode: 400,
-        message: 'No Medical Condtions Found',
+        message: "No Medical Condtions Found",
       };
     }
 
@@ -99,34 +99,34 @@ export class CriticalMedicalConditionController {
     };
   }
 
-  @Patch('updateCriticalMedicalCondition')
-  @ApiOperation({ summary: 'update Critcal Medical Condition from this api' })
+  @Patch("updateCriticalMedicalCondition")
+  @ApiOperation({ summary: "update Critcal Medical Condition from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
+          type: "string",
         },
         MedicalConditionName: {
-          type: 'string',
-          example: 'fever/any',
-          description: 'enter medical condition Name',
+          type: "string",
+          example: "fever/any",
+          description: "enter medical condition Name",
         },
         status: {
-          type: 'boolean',
-          example: 'false',
+          type: "boolean",
+          example: "false",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'Medical Critical condition Update',
+    description: "Medical Critical condition Update",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateCriticalMedicalCondition(
     @Body()
@@ -134,46 +134,46 @@ export class CriticalMedicalConditionController {
       id: string;
       MedicalConditionName: string;
       status: boolean;
-    },
+    }
   ) {
     const updatedCriticalMedicalcondtion =
       await this.criticalMedicalConditonService.updateMedicalCondition(
         data.id,
         data.MedicalConditionName,
-        data.status,
+        data.status
       );
     return {
       successCode: 200,
-      message: 'Medical condition updated',
+      message: "Medical condition updated",
       data: updatedCriticalMedicalcondtion,
     };
   }
-  @Get('criticalMedicalcondition/:Id')
+  @Get("criticalMedicalcondition/:Id")
   @ApiOperation({
-    summary: 'get critical medical condiiton by id from this api',
+    summary: "get critical medical condiiton by id from this api",
   })
   @ApiParam({
-    name: 'Id',
-    example: 'any',
+    name: "Id",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'critical Medical condition details',
+    description: "critical Medical condition details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
   async getCriticalMedicalconditionById(
-    @Param('Id') Id: string,
+    @Param("Id") Id: string
   ): Promise<Object> {
     const getCriticalMedicalCondition =
       await this.criticalMedicalConditonService.getCriticalMedicalConditionByid(
-        Id,
+        Id
       );
     return {
       successCode: 200,
-      successMessage: 'Critical history  detail',
+      successMessage: "Critical history  detail",
       list: getCriticalMedicalCondition,
     };
   }

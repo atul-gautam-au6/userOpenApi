@@ -10,8 +10,8 @@ import {
   UseFilters,
   UseGuards,
   UseInterceptors,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
 import {
   ApiBody,
   ApiOperation,
@@ -19,25 +19,25 @@ import {
   ApiResponse,
   ApiSecurity,
   ApiTags,
-} from '@nestjs/swagger';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { relation } from '../interface/relation.interface';
-import { RelationService } from '../services/relation.service';
+} from "@nestjs/swagger";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { JwtAuthGuard } from "src/auth/guard/jwt-auth.guard";
+import { relation } from "../interface/relation.interface";
+import { RelationService } from "../services/relation.service";
 
-@ApiTags('master-setting')
-@ApiSecurity('bearer')
+@ApiTags("master-setting")
+@ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
-@Controller('masterSetting')
+@Controller("masterSetting")
 export class RelationController {
   constructor(
-    @InjectModel('relation')
+    @InjectModel("relation")
     private readonly relationModel: Model<relation>,
-    private readonly relationService: RelationService,
+    private readonly relationService: RelationService
   ) {}
 
   /**
@@ -46,48 +46,48 @@ export class RelationController {
    * @param data relationship,type
    * @returns
    */
-  @Post('createRelation')
-  @ApiOperation({ summary: 'create relation from this api' })
+  @Post("createRelation")
+  @ApiOperation({ summary: "create relation from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         relationship: {
-          type: 'string',
-          example: 'any',
-          description: 'this is relationship name*',
+          type: "string",
+          example: "any",
+          description: "this is relationship name*",
         },
         type: {
-          type: 'string',
-          enum: ['Family', 'Professional', 'Locality'],
-          description: 'this is type of relation*',
+          type: "string",
+          enum: ["Family", "Professional", "Locality"],
+          description: "this is type of relation*",
         },
       },
     },
   })
   @ApiResponse({
     status: 201,
-    description: 'relation create',
+    description: "relation create",
   })
   @ApiResponse({
     status: 403,
-    description: 'All field are required',
+    description: "All field are required",
   })
   async createRelation(
     @Body()
     data: {
       relationship: string;
       type: string;
-    },
+    }
   ): Promise<Object> {
     const newrelation = await this.relationService.insertRelation(
       data.relationship,
-      data.type,
+      data.type
     );
 
     return {
       successCode: 201,
-      successMessage: 'relaton create success',
+      successMessage: "relaton create success",
       list: newrelation,
     };
   }
@@ -97,42 +97,42 @@ export class RelationController {
    * @param data id,state,city,pincode,status
    * @returns updated object
    */
-  @Put('updateRelation')
-  @ApiOperation({ summary: 'create relation from this api' })
+  @Put("updateRelation")
+  @ApiOperation({ summary: "create relation from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
-          example: 'any',
-          description: 'this is your relation id',
+          type: "string",
+          example: "any",
+          description: "this is your relation id",
         },
         relationship: {
-          type: 'string',
-          example: 'any',
-          description: 'this is relationship name*',
+          type: "string",
+          example: "any",
+          description: "this is relationship name*",
         },
         type: {
-          type: 'string',
-          enum: ['Family', 'Professional', 'Locality'],
-          description: 'this is type of relation*',
+          type: "string",
+          enum: ["Family", "Professional", "Locality"],
+          description: "this is type of relation*",
         },
         status: {
-          type: 'boolean',
+          type: "boolean",
           example: true,
-          description: 'this is status of relation*',
+          description: "this is status of relation*",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'relation update',
+    description: "relation update",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateRelation(
     @Body()
@@ -142,18 +142,18 @@ export class RelationController {
       type: string;
 
       status: boolean;
-    },
+    }
   ): Promise<Object> {
     const updaterelation = await this.relationService.updateRelation(
       data.id,
       data.relationship,
       data.type,
-      data.status,
+      data.status
     );
 
     return {
       successCode: 200,
-      successMessage: 'relaton update success',
+      successMessage: "relaton update success",
       list: updaterelation,
     };
   }
@@ -164,26 +164,26 @@ export class RelationController {
    * @param id string
    * @returns relation object
    */
-  @Get('findById/:id')
-  @ApiOperation({ summary: 'get relation by id from this api' })
+  @Get("findById/:id")
+  @ApiOperation({ summary: "get relation by id from this api" })
   @ApiParam({
-    name: 'id',
-    example: 'any',
+    name: "id",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'relation details',
+    description: "relation details",
   })
   @ApiResponse({
     status: 403,
     description:
-      'id field arpage: number, size: number, searchKey: stringe required',
+      "id field arpage: number, size: number, searchKey: stringe required",
   })
-  async getRelationById(@Param('id') id: string): Promise<Object> {
+  async getRelationById(@Param("id") id: string): Promise<Object> {
     const getrelation = await this.relationService.getRelationById(id);
     return {
       successCode: 200,
-      successMessage: 'get relation',
+      successMessage: "get relation",
       list: getrelation,
     };
   }
@@ -192,33 +192,33 @@ export class RelationController {
    * @description   get all relation list
    * @returns all relations list
    */
-  @ApiOperation({ summary: 'get all relation from this api' })
+  @ApiOperation({ summary: "get all relation from this api" })
   @ApiResponse({
     status: 200,
-    description: 'relation list',
+    description: "relation list",
   })
   @ApiResponse({
     status: 500,
-    description: 'server error',
+    description: "server error",
   })
-  @Get('findAll/relation')
+  @Get("findAll/relation")
   async getAllRelation(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number
   ): Promise<Object> {
     const pagination = {
       page: newPage || 1,
       size: pageSize || 10,
-      searchKey: '',
+      searchKey: "",
     };
     const result = await this.relationService.getAllRelation(
       pagination.page,
       pagination.size,
-      pagination.searchKey,
+      pagination.searchKey
     );
     return {
       successCode: 200,
-      successMessage: 'get relation list',
+      successMessage: "get relation list",
       list: result,
     };
   }

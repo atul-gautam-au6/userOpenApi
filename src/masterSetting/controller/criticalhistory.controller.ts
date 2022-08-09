@@ -7,74 +7,74 @@ import {
   Post,
   Put,
   Query,
-} from '@nestjs/common';
+} from "@nestjs/common";
 import {
   ApiBody,
   ApiOperation,
   ApiParam,
   ApiResponse,
   ApiTags,
-} from '@nestjs/swagger';
-import { CriticalHistorySevice } from '../services/criticahistory.service';
-import { criticalmedicalconditionSevice } from '../services/criticalmedicalcondition.service';
+} from "@nestjs/swagger";
+import { CriticalHistorySevice } from "../services/criticahistory.service";
+import { criticalmedicalconditionSevice } from "../services/criticalmedicalcondition.service";
 
-@ApiTags('master-setting')
-@Controller('admin')
+@ApiTags("master-setting")
+@Controller("admin")
 export class CriticalHistoryController {
   constructor(private readonly criticalHsitoryService: CriticalHistorySevice) {}
-  @Post('createCriticalHistory')
-  @ApiOperation({ summary: 'create medical Condition in this Api' })
+  @Post("createCriticalHistory")
+  @ApiOperation({ summary: "create medical Condition in this Api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         CriticalHistory: {
-          type: 'string',
-          example: 'fever',
-          description: 'this is the Critical history',
+          type: "string",
+          example: "fever",
+          description: "this is the Critical history",
         },
         status: {
-          type: 'boolean',
-          example: 'true/false',
+          type: "boolean",
+          example: "true/false",
         },
       },
     },
   })
   @ApiResponse({
     status: 202,
-    description: 'Criitcal History Added',
+    description: "Criitcal History Added",
   })
   @ApiResponse({
     status: 400,
-    description: 'Critical history is Mandatory',
+    description: "Critical history is Mandatory",
   })
   async createCriticalHistory(
-    @Body() data: { CriticalHistory: string; status: boolean },
+    @Body() data: { CriticalHistory: string; status: boolean }
   ): Promise<Object> {
-    console.log(data.CriticalHistory, 'medical condtion Name');
+    console.log(data.CriticalHistory, "medical condtion Name");
     if (!data.CriticalHistory) {
       return {
         errorCode: 403,
-        message: 'Critical history is Mandatory',
+        message: "Critical history is Mandatory",
       };
     }
     const newCriticalHistory =
       await this.criticalHsitoryService.insertCriticalHistory(
         data.CriticalHistory,
-        data.status,
+        data.status
       );
 
-    console.log(newCriticalHistory, 'new Medical condito ');
+    console.log(newCriticalHistory, "new Medical condito ");
     return {
       successCode: 201,
-      message: 'Critical history Created Scucessfully',
+      message: "Critical history Created Scucessfully",
       list: newCriticalHistory,
     };
   }
-  @Get('getCriticalHistory/getAll')
+  @Get("getCriticalHistory/getAll")
   async getAllCriticalHistory(
-    @Query('pageSize') pageSize: number,
-    @Query('newPage') newPage: number,
+    @Query("pageSize") pageSize: number,
+    @Query("newPage") newPage: number
   ): Promise<Object> {
     const pageOptions = {
       page: newPage || 1,
@@ -83,12 +83,12 @@ export class CriticalHistoryController {
     const criticalHistoryList =
       await this.criticalHsitoryService.getAllCriticalHistory(
         pageOptions.page,
-        pageOptions.size,
+        pageOptions.size
       );
     if (!criticalHistoryList) {
       return {
         successCode: 400,
-        message: 'No Medical Condtions Found',
+        message: "No Medical Condtions Found",
       };
     }
 
@@ -98,34 +98,34 @@ export class CriticalHistoryController {
     };
   }
 
-  @Patch('updateCriticalHistory')
-  @ApiOperation({ summary: 'update Critcal History from this api' })
+  @Patch("updateCriticalHistory")
+  @ApiOperation({ summary: "update Critcal History from this api" })
   @ApiBody({
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         id: {
-          type: 'string',
+          type: "string",
         },
         CriticalHistory: {
-          type: 'string',
-          example: 'fever/any',
-          description: 'enter medical condition Name',
+          type: "string",
+          example: "fever/any",
+          description: "enter medical condition Name",
         },
         status: {
-          type: 'boolean',
-          example: 'false',
+          type: "boolean",
+          example: "false",
         },
       },
     },
   })
   @ApiResponse({
     status: 200,
-    description: 'Critical History Updated',
+    description: "Critical History Updated",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field is required',
+    description: "id field is required",
   })
   async updateCriticalHistory(
     @Body()
@@ -133,40 +133,40 @@ export class CriticalHistoryController {
       id: string;
       CriticalHistory: string;
       status: boolean;
-    },
+    }
   ) {
     const updatedCriticalHistory =
       await this.criticalHsitoryService.updateCriticalHistory(
         data.id,
         data.CriticalHistory,
-        data.status,
+        data.status
       );
     return {
       successCode: 200,
-      message: 'Medical History updated',
+      message: "Medical History updated",
       data: updatedCriticalHistory,
     };
   }
-  @Get('criticalHistory/:Id')
-  @ApiOperation({ summary: 'get Critical history by id from this api' })
+  @Get("criticalHistory/:Id")
+  @ApiOperation({ summary: "get Critical history by id from this api" })
   @ApiParam({
-    name: 'Id',
-    example: 'any',
+    name: "Id",
+    example: "any",
   })
   @ApiResponse({
     status: 200,
-    description: 'critical history details',
+    description: "critical history details",
   })
   @ApiResponse({
     status: 403,
-    description: 'id field are required',
+    description: "id field are required",
   })
-  async getCriticalHistoryById(@Param('Id') Id: string): Promise<Object> {
+  async getCriticalHistoryById(@Param("Id") Id: string): Promise<Object> {
     const getCriticalHistory =
       await this.criticalHsitoryService.getCriticalHistoryByid(Id);
     return {
       successCode: 200,
-      successMessage: 'Critical history  detail',
+      successMessage: "Critical history  detail",
       list: getCriticalHistory,
     };
   }

@@ -1,11 +1,11 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { jwtConstants } from '../constants';
-import { Request } from 'express';
+import { ExtractJwt, Strategy } from "passport-jwt";
+import { PassportStrategy } from "@nestjs/passport";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { jwtConstants } from "../constants";
+import { Request } from "express";
 
 @Injectable()
-export class UserStrategy extends PassportStrategy(Strategy, 'user') {
+export class UserStrategy extends PassportStrategy(Strategy, "user") {
   constructor() {
     super({
       // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -13,7 +13,7 @@ export class UserStrategy extends PassportStrategy(Strategy, 'user') {
       secretOrKey: `${jwtConstants.secret}`,
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          const data = request?.cookies['auth-cookie'];
+          const data = request?.cookies["auth-cookie"];
 
           if (!data) {
             return null;
@@ -26,7 +26,7 @@ export class UserStrategy extends PassportStrategy(Strategy, 'user') {
 
   async validate(payload: any) {
     if (payload.isAdmin || payload.isSubAdmin) {
-      throw new UnauthorizedException('You are not valid user');
+      throw new UnauthorizedException("You are not valid user");
     }
     return { userId: payload.sub, username: payload.username };
   }

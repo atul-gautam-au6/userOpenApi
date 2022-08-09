@@ -1,6 +1,6 @@
-import * as mongoose from 'mongoose';
-import * as bcrypt from 'bcryptjs';
-import { validateEmail } from 'src/config/email.validator';
+import * as mongoose from "mongoose";
+import * as bcrypt from "bcryptjs";
+import { validateEmail } from "src/config/email.validator";
 
 const userSchema = new mongoose.Schema(
   {
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
       require: true,
       unique: true,
       trim: true,
-      validate: [validateEmail, 'Please fill a valid email address'],
+      validate: [validateEmail, "Please fill a valid email address"],
     },
     phone: {
       type: Number,
@@ -53,15 +53,15 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'users',
-  },
+    collection: "users",
+  }
 );
 
 userSchema.methods.matchPassword = async function (enterPassword) {
   return await bcrypt.compare(enterPassword, this.password);
 };
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     next();
   }
 

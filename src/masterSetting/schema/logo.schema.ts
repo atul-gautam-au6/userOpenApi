@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const logoSchema = new mongoose.Schema(
   {
@@ -16,8 +16,8 @@ const logoSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'logo',
-  },
+    collection: "logo",
+  }
 );
 
 export default logoSchema;

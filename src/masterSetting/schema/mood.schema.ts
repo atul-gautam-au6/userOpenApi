@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const moodSchema = new mongoose.Schema(
   {
@@ -20,7 +20,7 @@ const moodSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'mood',
-  },
+    collection: "mood",
+  }
 );
 export default moodSchema;

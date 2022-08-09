@@ -1,18 +1,18 @@
-import { Injectable, UseFilters, UseInterceptors } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { location } from '../interface/location.interface';
+import { Injectable, UseFilters, UseInterceptors } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { location } from "../interface/location.interface";
 
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
 export class LocationService {
   constructor(
-    @InjectModel('location')
-    private readonly locationModel: Model<location>,
+    @InjectModel("location")
+    private readonly locationModel: Model<location>
   ) {}
 
   /**
@@ -46,7 +46,7 @@ export class LocationService {
     state: string,
     city: string,
     pinCode: number,
-    status: boolean,
+    status: boolean
   ) {
     const saveLocation = await this.locationModel.findByIdAndUpdate(
       id,
@@ -56,7 +56,7 @@ export class LocationService {
         pinCode,
         status,
       },
-      { new: true },
+      { new: true }
     );
 
     return saveLocation;
@@ -80,9 +80,9 @@ export class LocationService {
         $match: {
           $expr: {
             $regexMatch: {
-              input: { $toString: '$state' },
+              input: { $toString: "$state" },
               regex: search,
-              options: 'i',
+              options: "i",
             },
           },
         },
@@ -96,34 +96,34 @@ export class LocationService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -132,7 +132,7 @@ export class LocationService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

@@ -1,20 +1,20 @@
-import { Injectable, UseFilters, UseInterceptors } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { ResourcesService } from 'src/resources/resources.service';
-import { hospital } from '../interfaces/hospital.interface';
+import { Injectable, UseFilters, UseInterceptors } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { ResourcesService } from "src/resources/resources.service";
+import { hospital } from "../interfaces/hospital.interface";
 
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(new LoggingInterceptor())
 export class HospitalService {
   constructor(
-    @InjectModel('hospital')
+    @InjectModel("hospital")
     private readonly hospitalModel: Model<hospital>,
-    private readonly resoureService: ResourcesService,
+    private readonly resoureService: ResourcesService
   ) {}
 
   /**
@@ -37,7 +37,7 @@ export class HospitalService {
     point: any,
     bannerImage: string,
     image: string,
-    description: string,
+    description: string
   ) {
     const saveHospital = new this.hospitalModel({
       name,
@@ -75,7 +75,7 @@ export class HospitalService {
     bannerImage: string,
     image: string,
     description: string,
-    status: boolean,
+    status: boolean
   ) {
     const result = this.hospitalModel.findByIdAndUpdate(
       id,
@@ -90,7 +90,7 @@ export class HospitalService {
         description,
         status,
       },
-      { new: true },
+      { new: true }
     );
 
     return result;
@@ -117,7 +117,7 @@ export class HospitalService {
       {
         $match: {
           $expr: {
-            $eq: ['$status', true],
+            $eq: ["$status", true],
           },
         },
       },
@@ -127,23 +127,23 @@ export class HospitalService {
             $or: [
               {
                 $regexMatch: {
-                  input: { $toString: '$name' },
+                  input: { $toString: "$name" },
                   regex: search,
-                  options: 'i',
+                  options: "i",
                 },
               },
               {
                 $regexMatch: {
-                  input: { $toString: '$email' },
+                  input: { $toString: "$email" },
                   regex: search,
-                  options: 'i',
+                  options: "i",
                 },
               },
               {
                 $regexMatch: {
-                  input: { $toString: '$phone' },
+                  input: { $toString: "$phone" },
                   regex: search,
-                  options: 'i',
+                  options: "i",
                 },
               },
             ],
@@ -159,34 +159,34 @@ export class HospitalService {
         $facet: {
           total: [
             {
-              $count: 'createdAt',
+              $count: "createdAt",
             },
           ],
           data: [
             {
               $addFields: {
-                _id: '$_id',
+                _id: "$_id",
               },
             },
           ],
         },
       },
       {
-        $unwind: '$total',
+        $unwind: "$total",
       },
       {
         $project: {
           data: {
             $slice: [
-              '$data',
+              "$data",
               skip,
               {
-                $ifNull: [limit, '$total.createdAt'],
+                $ifNull: [limit, "$total.createdAt"],
               },
             ],
           },
           meta: {
-            total: '$total.createdAt',
+            total: "$total.createdAt",
             limit: {
               $literal: limit,
             },
@@ -195,7 +195,7 @@ export class HospitalService {
             },
             pages: {
               $ceil: {
-                $divide: ['$total.createdAt', limit],
+                $divide: ["$total.createdAt", limit],
               },
             },
           },

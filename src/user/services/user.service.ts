@@ -3,19 +3,19 @@ import {
   UnauthorizedException,
   UseFilters,
   UseInterceptors,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Schema, Model } from 'mongoose';
-import { HttpExceptionFilter } from 'src/auth/exceptions/http.exception.filter';
-import { LoggingInterceptor } from 'src/auth/exceptions/logging.interceptor';
-import { paginationUsable } from 'src/config/email.validator';
-import { user } from '../interfaces/user.interface';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Schema, Model } from "mongoose";
+import { HttpExceptionFilter } from "src/auth/exceptions/http.exception.filter";
+import { LoggingInterceptor } from "src/auth/exceptions/logging.interceptor";
+import { paginationUsable } from "src/config/email.validator";
+import { user } from "../interfaces/user.interface";
 
 @Injectable()
 @UseInterceptors(new LoggingInterceptor())
 @UseFilters(new HttpExceptionFilter())
 export class UserService {
-  constructor(@InjectModel('user') private readonly userModel: Model<user>) {}
+  constructor(@InjectModel("user") private readonly userModel: Model<user>) {}
 
   /*
     @desc       
@@ -29,7 +29,7 @@ export class UserService {
     password: string,
     isSubAdmin: boolean,
     phone: number,
-    otp: number,
+    otp: number
   ) {
     const savedUser = new this.userModel({
       name,
@@ -56,7 +56,7 @@ export class UserService {
     email: string,
     isSubAdmin: boolean,
     phone: number,
-    status: boolean,
+    status: boolean
   ) {
     const result = await this.userModel.findByIdAndUpdate(
       id,
@@ -67,7 +67,7 @@ export class UserService {
         isSubAdmin,
         status,
       },
-      { new: true },
+      { new: true }
     );
 
     return result;
@@ -83,7 +83,7 @@ export class UserService {
   async getUserById(id: string) {
     const result = await this.userModel
       .findById(id)
-      .select('-password -isAdmin -isSubAdmin');
+      .select("-password -isAdmin -isSubAdmin");
 
     return result;
   }
@@ -97,7 +97,7 @@ export class UserService {
   async getUserByEmail(email: string) {
     const result = await this.userModel
       .findOne({ email })
-      .select('-password -isAdmin -isSubAdmin');
+      .select("-password -isAdmin -isSubAdmin");
 
     return result;
   }
@@ -109,7 +109,7 @@ export class UserService {
         emailVerified: true,
         otp: null,
       },
-      { new: true },
+      { new: true }
     );
   }
 
@@ -119,11 +119,10 @@ export class UserService {
         secured by admin
         return entire  object
   */
-  async getAllUsers(
-    // page: number, size: number, searchKey: string
-    ) {
+  async getAllUsers() // page: number, size: number, searchKey: string
+  {
     // const { limit, skip, search } = paginationUsable(page, size, searchKey);
-const result = await this.userModel.find()
+    const result = await this.userModel.find();
     // const result = await this.userModel.aggregate([
     //   {
     //     $match: {
@@ -201,12 +200,12 @@ const result = await this.userModel.find()
   async signinUser(email: string, password: string) {
     const result = await this.userModel.findOne({ email: email });
     if (!result) {
-      throw new UnauthorizedException('Invalid Username ');
+      throw new UnauthorizedException("Invalid Username ");
     }
     if (await result.matchPassword(password)) {
       return result;
     } else {
-      throw new UnauthorizedException('Invalid  Password');
+      throw new UnauthorizedException("Invalid  Password");
     }
   }
 
@@ -223,19 +222,19 @@ const result = await this.userModel.find()
           $expr: {
             $and: [
               {
-                $eq: ['$status', true],
+                $eq: ["$status", true],
               },
               {
-                $eq: ['$emailVerified', true],
+                $eq: ["$emailVerified", true],
               },
               {
-                $eq: ['$isSubAdmin', false],
+                $eq: ["$isSubAdmin", false],
               },
               {
-                $eq: ['$isAdmin', false],
+                $eq: ["$isAdmin", false],
               },
               {
-                $ne: ['$_id', currentUser],
+                $ne: ["$_id", currentUser],
               },
             ],
           },
@@ -245,9 +244,9 @@ const result = await this.userModel.find()
         $match: {
           $expr: {
             $regexMatch: {
-              input: '$name',
+              input: "$name",
               regex: query,
-              options: 'i',
+              options: "i",
             },
           },
         },

@@ -4,9 +4,9 @@ import {
   ExecutionContext,
   BadGatewayException,
   CallHandler,
-} from '@nestjs/common';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+} from "@nestjs/common";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -16,19 +16,19 @@ export class LoggingInterceptor implements NestInterceptor {
         // console.log("my msg start: ",err.message,": end");
         if (err.code == 11000 && err?.keyPattern?.email) {
           return throwError(
-            () => new BadGatewayException('Email already there'),
+            () => new BadGatewayException("Email already there")
           );
         }
         if (err.code == 11000 && err?.keyPattern?.phone) {
           return throwError(
-            () => new BadGatewayException('Phone already there'),
+            () => new BadGatewayException("Phone already there")
           );
-        } else if (err.path == '_id') {
-          return throwError(() => new BadGatewayException('Invalid id'));
+        } else if (err.path == "_id") {
+          return throwError(() => new BadGatewayException("Invalid id"));
         } else {
           return throwError(() => new BadGatewayException(err));
         }
-      }),
+      })
     );
   }
 }

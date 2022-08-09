@@ -1,14 +1,14 @@
-import { Module } from '@nestjs/common';
-import { CmsService } from './service/cms.service';
-import { CmsController } from './controller/cms.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import cmsSchema from './schema/cms.schema';
+import { Module } from "@nestjs/common";
+import { CmsService } from "./service/cms.service";
+import { CmsController } from "./controller/cms.controller";
+import { MongooseModule } from "@nestjs/mongoose";
+import cmsSchema from "./schema/cms.schema";
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'cms',
+        name: "cms",
         schema: cmsSchema,
       },
     ]),
