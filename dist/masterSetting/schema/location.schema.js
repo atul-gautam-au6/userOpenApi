@@ -25,7 +25,7 @@ const locationSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'locations',
+    collection: "locations",
 });
 exports.default = locationSchema;
 //# sourceMappingURL=location.schema.js.map

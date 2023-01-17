@@ -52,9 +52,9 @@ let LocationService = class LocationService {
                 $match: {
                     $expr: {
                         $regexMatch: {
-                            input: { $toString: '$state' },
+                            input: { $toString: "$state" },
                             regex: search,
-                            options: 'i',
+                            options: "i",
                         },
                     },
                 },
@@ -68,34 +68,34 @@ let LocationService = class LocationService {
                 $facet: {
                     total: [
                         {
-                            $count: 'createdAt',
+                            $count: "createdAt",
                         },
                     ],
                     data: [
                         {
                             $addFields: {
-                                _id: '$_id',
+                                _id: "$_id",
                             },
                         },
                     ],
                 },
             },
             {
-                $unwind: '$total',
+                $unwind: "$total",
             },
             {
                 $project: {
                     data: {
                         $slice: [
-                            '$data',
+                            "$data",
                             skip,
                             {
-                                $ifNull: [limit, '$total.createdAt'],
+                                $ifNull: [limit, "$total.createdAt"],
                             },
                         ],
                     },
                     meta: {
-                        total: '$total.createdAt',
+                        total: "$total.createdAt",
                         limit: {
                             $literal: limit,
                         },
@@ -104,7 +104,7 @@ let LocationService = class LocationService {
                         },
                         pages: {
                             $ceil: {
-                                $divide: ['$total.createdAt', limit],
+                                $divide: ["$total.createdAt", limit],
                             },
                         },
                     },
@@ -118,7 +118,7 @@ LocationService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('location')),
+    __param(0, (0, mongoose_1.InjectModel)("location")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], LocationService);
 exports.LocationService = LocationService;

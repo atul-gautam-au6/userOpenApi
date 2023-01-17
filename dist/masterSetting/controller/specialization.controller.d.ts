@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { SpecializationService } from '../services/specialization.service';
-import { specialization } from '../interface/specialization.interface';
+import { Model } from "mongoose";
+import { SpecializationService } from "../services/specialization.service";
+import { specialization } from "../interface/specialization.interface";
 export declare class SpecializationController {
     private readonly specializationModel;
     private readonly SpecializationService;

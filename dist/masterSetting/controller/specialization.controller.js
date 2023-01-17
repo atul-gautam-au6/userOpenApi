@@ -29,13 +29,13 @@ let SpecializationController = class SpecializationController {
         if (!data.name || !data.status) {
             return {
                 errorCode: 403,
-                errorMessage: 'Name and status fields are required*',
+                errorMessage: "Name and status fields are required*",
             };
         }
         const newSpecialization = await this.SpecializationService.insertSpecialization(data.name, data.status);
         return {
             successCode: 201,
-            successMessage: 'specialization create success',
+            successMessage: "specialization create success",
             list: newSpecialization,
         };
     }
@@ -43,7 +43,7 @@ let SpecializationController = class SpecializationController {
         const getSpecialization = await this.SpecializationService.updateSpecialization(data.id, data.name, data.status);
         return {
             successCode: 200,
-            successMessage: 'specialization update success',
+            successMessage: "specialization update success",
             list: getSpecialization,
         };
     }
@@ -51,7 +51,7 @@ let SpecializationController = class SpecializationController {
         const getSpecialization = await this.SpecializationService.getSpecializationByid(specializationId);
         return {
             successCode: 200,
-            successMessage: 'specialization details ',
+            successMessage: "specialization details ",
             list: getSpecialization,
         };
     }
@@ -59,43 +59,43 @@ let SpecializationController = class SpecializationController {
         const pagination = {
             page: newPage || 1,
             size: pageSize || 10,
-            searchKey: '',
+            searchKey: "",
         };
         const result = await this.SpecializationService.getAllSpecialization(pagination.page, pagination.size, pagination.searchKey);
         return {
             successCod: 200,
-            successMessage: 'all specialization list',
+            successMessage: "all specialization list",
             list: result,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createSpecialization'),
-    (0, swagger_1.ApiOperation)({ summary: 'create specialization  from this api' }),
+    (0, common_1.Post)("createSpecialization"),
+    (0, swagger_1.ApiOperation)({ summary: "create specialization  from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is specialization name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is specialization name*",
                 },
                 status: {
-                    type: 'booelan',
+                    type: "booelan",
                     example: true,
-                    description: 'this is status of specialization*',
+                    description: "this is status of specialization*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'specialization create',
+        description: "specialization create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -103,37 +103,37 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], SpecializationController.prototype, "createSpecialization", null);
 __decorate([
-    (0, common_1.Put)('updateSpecilalization'),
-    (0, swagger_1.ApiOperation)({ summary: 'update specialization from this api' }),
+    (0, common_1.Put)("updateSpecilalization"),
+    (0, swagger_1.ApiOperation)({ summary: "update specialization from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is your specialization',
+                    type: "string",
+                    example: "any",
+                    description: "this is your specialization",
                 },
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is specialization name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is specialization name*",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is status of specialization*',
+                    description: "this is status of specialization*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'specialization update',
+        description: "specialization update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -141,40 +141,40 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], SpecializationController.prototype, "updateSpecialization", null);
 __decorate([
-    (0, common_1.Get)('specialization/findone/:specializationId'),
-    (0, swagger_1.ApiOperation)({ summary: 'get specialization by id from this api' }),
+    (0, common_1.Get)("specialization/findone/:specializationId"),
+    (0, swagger_1.ApiOperation)({ summary: "get specialization by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'specializationId',
-        example: 'any',
+        name: "specializationId",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'specialization details',
+        description: "specialization details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('specializationId')),
+    __param(0, (0, common_1.Param)("specializationId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], SpecializationController.prototype, "getCategoryById", null);
 __decorate([
-    (0, common_1.Get)('specialization/getAll'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("specialization/getAll"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], SpecializationController.prototype, "getAllspecialization", null);
 SpecializationController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    (0, common_1.Controller)('admin'),
-    __param(0, (0, mongoose_1.InjectModel)('specialization')),
+    (0, common_1.Controller)("admin"),
+    __param(0, (0, mongoose_1.InjectModel)("specialization")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         specialization_service_1.SpecializationService])
 ], SpecializationController);

@@ -21,8 +21,8 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
             secretOrKey: `${constants_1.jwtConstants.secret}`,
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromExtractors([
                 (request) => {
-                    const data = request === null || request === void 0 ? void 0 : request.cookies['auth-cookie'];
-                    console.log('token : -', data);
+                    const data = request === null || request === void 0 ? void 0 : request.cookies["auth-cookie"];
+                    console.log("token : -", data);
                     if (!data) {
                         return null;
                     }
@@ -33,7 +33,7 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
     }
     async validate(payload) {
         if (!payload.isAdmin || payload.isSubAdmin) {
-            throw new common_1.UnauthorizedException('You are not admin');
+            throw new common_1.UnauthorizedException("You are not admin");
         }
         return { userId: payload.sub, username: payload.username };
     }

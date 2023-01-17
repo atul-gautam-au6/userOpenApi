@@ -13,7 +13,7 @@ const TreatmentSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'Treatment',
+    collection: "Treatment",
 });
 exports.default = TreatmentSchema;
 //# sourceMappingURL=treatment.schema.js.map

@@ -22,9 +22,9 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { ResourcesService } from 'src/resources/resources.service';
-import { hospital } from '../interfaces/hospital.interface';
+import { Model } from "mongoose";
+import { ResourcesService } from "src/resources/resources.service";
+import { hospital } from "../interfaces/hospital.interface";
 export declare class HospitalService {
     private readonly hospitalModel;
     private readonly resoureService;

@@ -19,7 +19,7 @@ CmsModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 {
-                    name: 'cms',
+                    name: "cms",
                     schema: cms_schema_1.default,
                 },
             ]),

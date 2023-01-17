@@ -24,7 +24,7 @@ const medicinesSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'medicines',
+    collection: "medicines",
 });
 exports.default = medicinesSchema;
 //# sourceMappingURL=medicines.schema.js.map

@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalInterceptors(new logging_interceptor_1.LoggingInterceptor());
-    app.use(['/api', '/api-json'], basicAuth({
+    app.use(["/api", "/api-json"], basicAuth({
         challenge: true,
         users: {
             [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
@@ -29,7 +29,7 @@ async function bootstrap() {
     })
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('api', app, document);
+    swagger_1.SwaggerModule.setup("api", app, document);
     await app.listen(process.env.PORT || 4000);
     common_1.Logger.log(`Server running at port ${process.env.PORT || 4000}`);
 }

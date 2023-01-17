@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { hospital } from '../interfaces/hospital.interface';
-import { HospitalService } from '../services/hospital.service';
+import { Model } from "mongoose";
+import { hospital } from "../interfaces/hospital.interface";
+import { HospitalService } from "../services/hospital.service";
 export declare class HospitalController {
     private readonly hospitalModel;
     private readonly hospitalService;

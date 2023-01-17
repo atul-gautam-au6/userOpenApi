@@ -22,7 +22,7 @@ let HealthConditionService = class HealthConditionService {
         this.healthConditionModal = healthConditionModal;
     }
     async insertHealthCondition(HealthCondition, status) {
-        console.log(HealthCondition, 'iside servie');
+        console.log(HealthCondition, "iside servie");
         try {
             const newHealthCondition = new this.healthConditionModal({
                 HealthCondition: HealthCondition,
@@ -32,15 +32,15 @@ let HealthConditionService = class HealthConditionService {
             return newHealthCondition;
         }
         catch (error) {
-            throw new common_1.NotFoundException('could not insert');
+            throw new common_1.NotFoundException("could not insert");
         }
     }
     async getAllHealthCondition(page, pageSize) {
-        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, '');
+        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, "");
         try {
             const healthconditionList = await this.healthConditionModal
                 .find({})
-                .sort({ CriticalHistory: 'asc', _id: 'desc' })
+                .sort({ CriticalHistory: "asc", _id: "desc" })
                 .limit(limit)
                 .skip(skip);
             const count = await this.healthConditionModal.count().exec();
@@ -66,7 +66,7 @@ let HealthConditionService = class HealthConditionService {
             return updatedHealthCondition;
         }
         catch (error) {
-            throw new common_1.NotFoundException('Could not found Data');
+            throw new common_1.NotFoundException("Could not found Data");
         }
     }
     async getHealthConditionByid(id) {
@@ -76,7 +76,7 @@ let HealthConditionService = class HealthConditionService {
 };
 HealthConditionService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('healthcondition')),
+    __param(0, (0, mongoose_1.InjectModel)("healthcondition")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], HealthConditionService);
 exports.HealthConditionService = HealthConditionService;

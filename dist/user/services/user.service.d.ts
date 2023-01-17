@@ -1,5 +1,5 @@
-import { Model } from 'mongoose';
-import { user } from '../interfaces/user.interface';
+import { Model } from "mongoose";
+import { user } from "../interfaces/user.interface";
 export declare class UserService {
     private readonly userModel;
     constructor(userModel: Model<user>);

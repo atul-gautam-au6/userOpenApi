@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         require: true,
         unique: true,
         trim: true,
-        validate: [email_validator_1.validateEmail, 'Please fill a valid email address'],
+        validate: [email_validator_1.validateEmail, "Please fill a valid email address"],
     },
     phone: {
         type: Number,
@@ -34,13 +34,13 @@ const userSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'users',
+    collection: "users",
 });
 userSchema.methods.matchPassword = async function (enterPassword) {
     return await bcrypt.compare(enterPassword, this.password);
 };
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
         next();
     }
     const salt = await bcrypt.genSalt(10);

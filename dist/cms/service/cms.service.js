@@ -49,9 +49,9 @@ let CmsService = class CmsService {
                 $match: {
                     $expr: {
                         $regexMatch: {
-                            input: { $toString: '$name' },
+                            input: { $toString: "$name" },
                             regex: search,
-                            options: 'i',
+                            options: "i",
                         },
                     },
                 },
@@ -65,34 +65,34 @@ let CmsService = class CmsService {
                 $facet: {
                     total: [
                         {
-                            $count: 'createdAt',
+                            $count: "createdAt",
                         },
                     ],
                     data: [
                         {
                             $addFields: {
-                                _id: '$_id',
+                                _id: "$_id",
                             },
                         },
                     ],
                 },
             },
             {
-                $unwind: '$total',
+                $unwind: "$total",
             },
             {
                 $project: {
                     data: {
                         $slice: [
-                            '$data',
+                            "$data",
                             skip,
                             {
-                                $ifNull: [limit, '$total.createdAt'],
+                                $ifNull: [limit, "$total.createdAt"],
                             },
                         ],
                     },
                     meta: {
-                        total: '$total.createdAt',
+                        total: "$total.createdAt",
                         limit: {
                             $literal: limit,
                         },
@@ -101,7 +101,7 @@ let CmsService = class CmsService {
                         },
                         pages: {
                             $ceil: {
-                                $divide: ['$total.createdAt', limit],
+                                $divide: ["$total.createdAt", limit],
                             },
                         },
                     },
@@ -115,7 +115,7 @@ CmsService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('cms')),
+    __param(0, (0, mongoose_1.InjectModel)("cms")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], CmsService);
 exports.CmsService = CmsService;

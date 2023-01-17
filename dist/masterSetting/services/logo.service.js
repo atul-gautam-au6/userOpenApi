@@ -38,7 +38,7 @@ let LogoService = class LogoService {
     async getLogoById(id) {
         const getLogo = await this.serviceModel
             .findById(id)
-            .select('-status -createdAt -updatedAt');
+            .select("-status -createdAt -updatedAt");
         return getLogo;
     }
     async getAllLogo(page, size, searchKey) {
@@ -53,34 +53,34 @@ let LogoService = class LogoService {
                 $facet: {
                     total: [
                         {
-                            $count: 'createdAt',
+                            $count: "createdAt",
                         },
                     ],
                     data: [
                         {
                             $addFields: {
-                                _id: '$_id',
+                                _id: "$_id",
                             },
                         },
                     ],
                 },
             },
             {
-                $unwind: '$total',
+                $unwind: "$total",
             },
             {
                 $project: {
                     data: {
                         $slice: [
-                            '$data',
+                            "$data",
                             skip,
                             {
-                                $ifNull: [limit, '$total.createdAt'],
+                                $ifNull: [limit, "$total.createdAt"],
                             },
                         ],
                     },
                     meta: {
-                        total: '$total.createdAt',
+                        total: "$total.createdAt",
                         limit: {
                             $literal: limit,
                         },
@@ -89,7 +89,7 @@ let LogoService = class LogoService {
                         },
                         pages: {
                             $ceil: {
-                                $divide: ['$total.createdAt', limit],
+                                $divide: ["$total.createdAt", limit],
                             },
                         },
                     },
@@ -103,7 +103,7 @@ LogoService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('logo')),
+    __param(0, (0, mongoose_1.InjectModel)("logo")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], LogoService);
 exports.LogoService = LogoService;

@@ -1,9 +1,9 @@
-import { Model } from 'mongoose';
-import { Response } from 'express';
-import { AuthService } from 'src/auth/services/auth.service';
-import { ResourcesService } from 'src/resources/resources.service';
-import { user } from '../interfaces/user.interface';
-import { UserService } from '../services/user.service';
+import { Model } from "mongoose";
+import { Response } from "express";
+import { AuthService } from "src/auth/services/auth.service";
+import { ResourcesService } from "src/resources/resources.service";
+import { user } from "../interfaces/user.interface";
+import { UserService } from "../services/user.service";
 export declare class UserController {
     private readonly userModel;
     private readonly userService;

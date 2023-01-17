@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.V3AuthGuard = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
-let V3AuthGuard = class V3AuthGuard extends (0, passport_1.AuthGuard)('v3') {
+let V3AuthGuard = class V3AuthGuard extends (0, passport_1.AuthGuard)("v3") {
 };
 V3AuthGuard = __decorate([
     (0, common_1.Injectable)()

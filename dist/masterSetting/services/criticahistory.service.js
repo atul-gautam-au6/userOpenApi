@@ -22,7 +22,7 @@ let CriticalHistorySevice = class CriticalHistorySevice {
         this.criticalHistoryModal = criticalHistoryModal;
     }
     async insertCriticalHistory(CriticalHistory, status) {
-        console.log(CriticalHistory, 'iside servie');
+        console.log(CriticalHistory, "iside servie");
         try {
             const newCriticalHistory = new this.criticalHistoryModal({
                 CriticalHistory: CriticalHistory,
@@ -32,15 +32,15 @@ let CriticalHistorySevice = class CriticalHistorySevice {
             return newCriticalHistory;
         }
         catch (error) {
-            throw new common_1.NotFoundException('could not insert');
+            throw new common_1.NotFoundException("could not insert");
         }
     }
     async getAllCriticalHistory(page, pageSize) {
-        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, '');
+        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, "");
         try {
             const criticalHistoryList = await this.criticalHistoryModal
                 .find({})
-                .sort({ CriticalHistory: 'asc', _id: 'desc' })
+                .sort({ CriticalHistory: "asc", _id: "desc" })
                 .limit(limit)
                 .skip(skip);
             const count = await this.criticalHistoryModal.count().exec();
@@ -66,7 +66,7 @@ let CriticalHistorySevice = class CriticalHistorySevice {
             return updatedProduct;
         }
         catch (error) {
-            throw new common_1.NotFoundException('Could not found Data');
+            throw new common_1.NotFoundException("Could not found Data");
         }
     }
     async getCriticalHistoryByid(id) {
@@ -76,7 +76,7 @@ let CriticalHistorySevice = class CriticalHistorySevice {
 };
 CriticalHistorySevice = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('criticalhistory')),
+    __param(0, (0, mongoose_1.InjectModel)("criticalhistory")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], CriticalHistorySevice);
 exports.CriticalHistorySevice = CriticalHistorySevice;

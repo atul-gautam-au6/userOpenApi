@@ -22,7 +22,7 @@ let TreatmentService = class TreatmentService {
         this.TreatmentModal = TreatmentModal;
     }
     async insertTreatment(TreatmentName, status) {
-        console.log(TreatmentName, 'iside servie');
+        console.log(TreatmentName, "iside servie");
         try {
             const newTreatment = new this.TreatmentModal({
                 TreatmentName: TreatmentName,
@@ -32,14 +32,14 @@ let TreatmentService = class TreatmentService {
             return newTreatment;
         }
         catch (error) {
-            throw new common_1.NotFoundException('could not insert');
+            throw new common_1.NotFoundException("could not insert");
         }
     }
     async getAllTreatments(page, pageSize) {
-        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, '');
+        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, "");
         try {
             const TreatmentList = await this.TreatmentModal.find({})
-                .sort({ TreatmentName: 'asc', _id: 'desc' })
+                .sort({ TreatmentName: "asc", _id: "desc" })
                 .limit(limit)
                 .skip(skip);
             const count = await this.TreatmentModal.count().exec();
@@ -65,7 +65,7 @@ let TreatmentService = class TreatmentService {
             return updatedTreatment;
         }
         catch (error) {
-            throw new common_1.NotFoundException('Could not found Data');
+            throw new common_1.NotFoundException("Could not found Data");
         }
     }
     async getTreatmentByid(id) {
@@ -75,7 +75,7 @@ let TreatmentService = class TreatmentService {
 };
 TreatmentService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('Treatment')),
+    __param(0, (0, mongoose_1.InjectModel)("Treatment")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], TreatmentService);
 exports.TreatmentService = TreatmentService;

@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResourcesService = void 0;
 const common_1 = require("@nestjs/common");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 let ResourcesService = class ResourcesService {
     async sendMail(mailOptions) {
         const transporter = nodemailer.createTransport({
@@ -33,7 +33,7 @@ let ResourcesService = class ResourcesService {
             page = 1;
         }
         if (!search) {
-            search = '';
+            search = "";
         }
         if (!size || size < 10) {
             size = 10;

@@ -31,7 +31,7 @@ let AdminController = class AdminController {
         const newUser = await this.userService.insertUser(data.name, data.email, data.password, false, data.phone, null);
         return {
             successCode: 201,
-            successMessage: 'User create success',
+            successMessage: "User create success",
             list: newUser,
         };
     }
@@ -39,7 +39,7 @@ let AdminController = class AdminController {
         const newUser = await this.userService.updateUser(data.id, data.name, data.email, false, data.phone, data.status);
         return {
             successCode: 200,
-            successMessage: 'User update success',
+            successMessage: "User update success",
             list: newUser,
         };
     }
@@ -47,56 +47,57 @@ let AdminController = class AdminController {
         const newUser = await this.userService.getUserById(userId);
         return {
             successCode: 200,
-            successMessage: 'User details',
+            successMessage: "User details",
             list: newUser,
         };
     }
     async getAllUsers() {
-        const newUser = await this.userService.getAllUsers();
+        const newUser = await this.userService
+            .getAllUsers();
         return {
             successCode: 200,
-            successMessage: 'User list',
+            successMessage: "User list",
             list: newUser,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('create-user'),
-    (0, swagger_1.ApiOperation)({ summary: 'create user from this api' }),
+    (0, common_1.Post)("create-user"),
+    (0, swagger_1.ApiOperation)({ summary: "create user from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user name *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user name *",
                 },
                 email: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user email *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user email *",
                 },
                 phone: {
-                    type: 'number',
-                    example: 'any',
-                    description: 'this is user phone *',
+                    type: "number",
+                    example: "any",
+                    description: "this is user phone *",
                 },
                 password: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user password *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user password *",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'user create',
+        description: "user create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'internal server error',
+        description: "internal server error",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -104,52 +105,52 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "createUser", null);
 __decorate([
-    (0, common_1.Put)('update-user'),
-    (0, swagger_1.ApiOperation)({ summary: 'update user from this api' }),
+    (0, common_1.Put)("update-user"),
+    (0, swagger_1.ApiOperation)({ summary: "update user from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user id *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user id *",
                 },
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user name *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user name *",
                 },
                 email: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user email *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user email *",
                 },
                 phone: {
-                    type: 'number',
-                    example: 'any',
-                    description: 'this is user phone *',
+                    type: "number",
+                    example: "any",
+                    description: "this is user phone *",
                 },
                 password: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is user password *',
+                    type: "string",
+                    example: "any",
+                    description: "this is user password *",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is user status *',
+                    description: "this is user status *",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'user update',
+        description: "user update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'internal server error',
+        description: "internal server error",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -157,46 +158,46 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "updateUser", null);
 __decorate([
-    (0, common_1.Get)('user/:userId'),
-    (0, swagger_1.ApiOperation)({ summary: 'get user by id from this api' }),
+    (0, common_1.Get)("user/:userId"),
+    (0, swagger_1.ApiOperation)({ summary: "get user by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'userId',
-        example: 'any',
+        name: "userId",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'user details',
+        description: "user details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('userId')),
+    __param(0, (0, common_1.Param)("userId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "getUserById", null);
 __decorate([
-    (0, common_1.Get)('users'),
-    (0, swagger_1.ApiOperation)({ summary: 'get user  list from this api' }),
+    (0, common_1.Get)("users"),
+    (0, swagger_1.ApiOperation)({ summary: "get user  list from this api" }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'user list',
+        description: "user list",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'server error',
+        description: "server error",
     }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "getAllUsers", null);
 AdminController = __decorate([
-    (0, swagger_1.ApiTags)('User crud'),
-    (0, common_1.Controller)('admin'),
+    (0, swagger_1.ApiTags)("User crud"),
+    (0, common_1.Controller)("admin"),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
-    __param(0, (0, mongoose_1.InjectModel)('user')),
+    __param(0, (0, mongoose_1.InjectModel)("user")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         user_service_1.UserService,
         auth_service_1.AuthService])

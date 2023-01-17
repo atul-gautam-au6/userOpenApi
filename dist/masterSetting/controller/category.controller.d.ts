@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { CategoryService } from '../services/category.service';
-import { category } from '../interface/category.interface';
+import { Model } from "mongoose";
+import { CategoryService } from "../services/category.service";
+import { category } from "../interface/category.interface";
 export declare class CategoryController {
     private readonly categoryModel;
     private readonly categoryService;

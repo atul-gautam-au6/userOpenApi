@@ -13,7 +13,7 @@ const criticalhistorySchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'criticalhistory',
+    collection: "criticalhistory",
 });
 exports.default = criticalhistorySchema;
 //# sourceMappingURL=criticalhistory.js.map

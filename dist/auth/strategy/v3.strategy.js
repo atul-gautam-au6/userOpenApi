@@ -21,10 +21,10 @@ let RecaptchaGuard = class RecaptchaGuard {
         const { data } = await this.httpService
             .post(`https://www.google.com/recaptcha/api/siteverify?response=${body.token}&secret=${process.env.V3_SECRATE_KEY}`)
             .toPromise();
-        if (body.token == 'swagger_test_v3')
+        if (body.token == "swagger_test_v3")
             return true;
         else if (!data.success) {
-            throw new common_1.ForbiddenException('Invalid token');
+            throw new common_1.ForbiddenException("Invalid token");
         }
         return true;
     }

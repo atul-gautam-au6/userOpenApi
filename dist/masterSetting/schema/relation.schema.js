@@ -13,7 +13,7 @@ const relationSchema = new mongoose.Schema({
         require: true,
         max: 30,
         trim: true,
-        enum: ['Family', 'Professional', 'Locality'],
+        enum: ["Family", "Professional", "Locality"],
     },
     status: {
         type: Boolean,
@@ -22,7 +22,7 @@ const relationSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'relation',
+    collection: "relation",
 });
 exports.default = relationSchema;
 //# sourceMappingURL=relation.schema.js.map

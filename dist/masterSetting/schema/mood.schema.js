@@ -19,7 +19,7 @@ const moodSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'mood',
+    collection: "mood",
 });
 exports.default = moodSchema;
 //# sourceMappingURL=mood.schema.js.map

@@ -49,47 +49,47 @@ MasterSettingModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 {
-                    name: 'location',
+                    name: "location",
                     schema: location_schema_1.default,
                 },
                 {
-                    name: 'relation',
+                    name: "relation",
                     schema: relation_schema_1.default,
                 },
                 {
-                    name: 'specialization',
+                    name: "specialization",
                     schema: specialization_schema_1.default,
                 },
                 {
-                    name: 'category',
+                    name: "category",
                     schema: category_schema_1.default,
                 },
                 {
-                    name: 'logo',
+                    name: "logo",
                     schema: logo_schema_1.default,
                 },
                 {
-                    name: 'mood',
+                    name: "mood",
                     schema: mood_schema_1.default,
                 },
                 {
-                    name: 'criticalmedicalcondition',
+                    name: "criticalmedicalcondition",
                     schema: criticalmedicalcondition_1.default,
                 },
                 {
-                    name: 'criticalhistory',
+                    name: "criticalhistory",
                     schema: criticalhistory_1.default,
                 },
                 {
-                    name: 'healthcondition',
+                    name: "healthcondition",
                     schema: healthcondition_schema_1.default,
                 },
                 {
-                    name: 'Treatment',
+                    name: "Treatment",
                     schema: treatment_schema_1.default,
                 },
                 {
-                    name: 'medicines',
+                    name: "medicines",
                     schema: medicines_schema_1.default,
                 },
             ]),

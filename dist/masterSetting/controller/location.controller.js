@@ -29,7 +29,7 @@ let LocationController = class LocationController {
         const newLocation = await this.locationService.insertLocation(data.state, data.city, data.pinCode);
         return {
             successCode: 201,
-            successMessage: 'locaton create success',
+            successMessage: "locaton create success",
             list: newLocation,
         };
     }
@@ -37,7 +37,7 @@ let LocationController = class LocationController {
         const updateLocation = await this.locationService.updateLocation(data.id, data.state, data.city, data.pinCode, data.status);
         return {
             successCode: 200,
-            successMessage: 'locaton update success',
+            successMessage: "locaton update success",
             list: updateLocation,
         };
     }
@@ -45,7 +45,7 @@ let LocationController = class LocationController {
         const getLocation = await this.locationService.getLocationById(id);
         return {
             successCode: 200,
-            successMessage: 'get location',
+            successMessage: "get location",
             list: getLocation,
         };
     }
@@ -53,48 +53,48 @@ let LocationController = class LocationController {
         const pagination = {
             page: newPage || 1,
             size: pageSize || 10,
-            searchKey: '',
+            searchKey: "",
         };
         const result = await this.locationService.getAllLocation(pagination.page, pagination.size, pagination.searchKey);
         return {
             successCod: 200,
-            successMessage: 'all categories list',
+            successMessage: "all categories list",
             list: result,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createLocation'),
-    (0, swagger_1.ApiOperation)({ summary: 'create location from this api' }),
+    (0, common_1.Post)("createLocation"),
+    (0, swagger_1.ApiOperation)({ summary: "create location from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 state: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is state name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is state name*",
                 },
                 city: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is city name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is city name*",
                 },
                 pinCode: {
-                    type: 'number',
+                    type: "number",
                     example: true,
-                    description: 'this is pin code*',
+                    description: "this is pin code*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'location create',
+        description: "location create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -102,42 +102,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LocationController.prototype, "createLocation", null);
 __decorate([
-    (0, common_1.Put)('updateLocation'),
-    (0, swagger_1.ApiOperation)({ summary: 'update location from this api' }),
+    (0, common_1.Put)("updateLocation"),
+    (0, swagger_1.ApiOperation)({ summary: "update location from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is your location id',
+                    type: "string",
+                    example: "any",
+                    description: "this is your location id",
                 },
                 state: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is state name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is state name*",
                 },
                 city: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is city name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is city name*",
                 },
                 pinCode: {
-                    type: 'number',
+                    type: "number",
                     example: true,
-                    description: 'this is pin code*',
+                    description: "this is pin code*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'location create',
+        description: "location create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -145,41 +145,41 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LocationController.prototype, "updateLocation", null);
 __decorate([
-    (0, common_1.Get)('getLocation/:id'),
-    (0, swagger_1.ApiOperation)({ summary: 'get location by id from this api' }),
+    (0, common_1.Get)("getLocation/:id"),
+    (0, swagger_1.ApiOperation)({ summary: "get location by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'id',
-        example: 'any',
+        name: "id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'location details',
+        description: "location details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], LocationController.prototype, "getLocationById", null);
 __decorate([
-    (0, common_1.Get)('getAllLocation'),
-    (0, swagger_1.ApiOperation)({ summary: 'get All location  from this api' }),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("getAllLocation"),
+    (0, swagger_1.ApiOperation)({ summary: "get All location  from this api" }),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], LocationController.prototype, "getAllLocation", null);
 LocationController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    (0, common_1.Controller)('admin/location'),
-    __param(0, (0, mongoose_1.InjectModel)('location')),
+    (0, common_1.Controller)("admin/location"),
+    __param(0, (0, mongoose_1.InjectModel)("location")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         location_service_1.LocationService])
 ], LocationController);

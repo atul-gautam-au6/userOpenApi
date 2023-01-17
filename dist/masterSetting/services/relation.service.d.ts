@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { relation } from '../interface/relation.interface';
+import { Model } from "mongoose";
+import { relation } from "../interface/relation.interface";
 export declare class RelationService {
     private readonly relationModel;
     constructor(relationModel: Model<relation>);

@@ -35,13 +35,13 @@ let HospitalController = class HospitalController {
             !data.description) {
             res.status(403).json({
                 errorCode: 403,
-                errorMessage: 'All field are required',
+                errorMessage: "All field are required",
             });
         }
         const result = await this.hospitalService.insertHospital(data.name, data.email, data.phone, data.location, data.point, data.bannerImage, data.image, data.description);
         return {
             successCode: 201,
-            successMessage: 'hospita create sucess',
+            successMessage: "hospita create sucess",
             list: result,
         };
     }
@@ -49,13 +49,13 @@ let HospitalController = class HospitalController {
         if (!data.id) {
             res.status(403).json({
                 errorCode: 403,
-                errorMessage: 'Id is required',
+                errorMessage: "Id is required",
             });
         }
         const result = await this.hospitalService.updateHospital(data.id, data.name, data.email, data.phone, data.location, data.point, data.bannerImage, data.image, data.description, data.status);
         return {
             successCode: 200,
-            successMessage: 'hospita update sucess',
+            successMessage: "hospita update sucess",
             list: result,
         };
     }
@@ -63,28 +63,28 @@ let HospitalController = class HospitalController {
         if (!id) {
             return res.status(403).json({
                 errorCode: 403,
-                errorMessgae: 'id is required',
+                errorMessgae: "id is required",
             });
         }
         const result = await this.hospitalService.getHospitalById(id);
         return {
             successCode: 200,
-            successMessage: 'get hospital details',
+            successMessage: "get hospital details",
             list: result,
         };
     }
     async allHospitals() {
-        const pagination = { page: 1, size: 10, searchKey: '' };
+        const pagination = { page: 1, size: 10, searchKey: "" };
         const result = await this.hospitalService.getHospitalList(pagination.page, pagination.size, pagination.searchKey);
         return {
             successCod: 200,
-            successMessage: 'all hospital list',
+            successMessage: "all hospital list",
             list: result,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createHospital'),
+    (0, common_1.Post)("createHospital"),
     __param(0, (0, common_1.Response)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -92,7 +92,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "createHospital", null);
 __decorate([
-    (0, common_1.Put)('updateHospital'),
+    (0, common_1.Put)("updateHospital"),
     __param(0, (0, common_1.Response)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -100,27 +100,27 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "updateeHospital", null);
 __decorate([
-    (0, common_1.Get)('findById/:id'),
+    (0, common_1.Get)("findById/:id"),
     __param(0, (0, common_1.Response)()),
-    __param(1, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "getHospitalById", null);
 __decorate([
-    (0, common_1.Get)('allHospital'),
+    (0, common_1.Get)("allHospital"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "allHospitals", null);
 HospitalController = __decorate([
-    (0, swagger_1.ApiTags)('hospital'),
-    (0, common_1.Controller)('admin/hospital'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("hospital"),
+    (0, common_1.Controller)("admin/hospital"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('hospital')),
+    __param(0, (0, mongoose_1.InjectModel)("hospital")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         hospital_service_1.HospitalService])
 ], HospitalController);

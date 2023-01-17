@@ -50,9 +50,9 @@ let RelationService = class RelationService {
                 $match: {
                     $expr: {
                         $regexMatch: {
-                            input: { $toString: '$relationship' },
+                            input: { $toString: "$relationship" },
                             regex: search,
-                            options: 'i',
+                            options: "i",
                         },
                     },
                 },
@@ -66,34 +66,34 @@ let RelationService = class RelationService {
                 $facet: {
                     total: [
                         {
-                            $count: 'createdAt',
+                            $count: "createdAt",
                         },
                     ],
                     data: [
                         {
                             $addFields: {
-                                _id: '$_id',
+                                _id: "$_id",
                             },
                         },
                     ],
                 },
             },
             {
-                $unwind: '$total',
+                $unwind: "$total",
             },
             {
                 $project: {
                     data: {
                         $slice: [
-                            '$data',
+                            "$data",
                             skip,
                             {
-                                $ifNull: [limit, '$total.createdAt'],
+                                $ifNull: [limit, "$total.createdAt"],
                             },
                         ],
                     },
                     meta: {
-                        total: '$total.createdAt',
+                        total: "$total.createdAt",
                         limit: {
                             $literal: limit,
                         },
@@ -102,7 +102,7 @@ let RelationService = class RelationService {
                         },
                         pages: {
                             $ceil: {
-                                $divide: ['$total.createdAt', limit],
+                                $divide: ["$total.createdAt", limit],
                             },
                         },
                     },
@@ -116,7 +116,7 @@ RelationService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('relation')),
+    __param(0, (0, mongoose_1.InjectModel)("relation")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], RelationService);
 exports.RelationService = RelationService;

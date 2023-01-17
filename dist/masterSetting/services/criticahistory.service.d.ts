@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { criticalhistory } from '../interface/criticalhistory';
+import { Model } from "mongoose";
+import { criticalhistory } from "../interface/criticalhistory";
 export declare class CriticalHistorySevice {
     private readonly criticalHistoryModal;
     constructor(criticalHistoryModal: Model<criticalhistory>);

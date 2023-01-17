@@ -29,7 +29,7 @@ let RelationController = class RelationController {
         const newrelation = await this.relationService.insertRelation(data.relationship, data.type);
         return {
             successCode: 201,
-            successMessage: 'relaton create success',
+            successMessage: "relaton create success",
             list: newrelation,
         };
     }
@@ -37,7 +37,7 @@ let RelationController = class RelationController {
         const updaterelation = await this.relationService.updateRelation(data.id, data.relationship, data.type, data.status);
         return {
             successCode: 200,
-            successMessage: 'relaton update success',
+            successMessage: "relaton update success",
             list: updaterelation,
         };
     }
@@ -45,7 +45,7 @@ let RelationController = class RelationController {
         const getrelation = await this.relationService.getRelationById(id);
         return {
             successCode: 200,
-            successMessage: 'get relation',
+            successMessage: "get relation",
             list: getrelation,
         };
     }
@@ -53,43 +53,43 @@ let RelationController = class RelationController {
         const pagination = {
             page: newPage || 1,
             size: pageSize || 10,
-            searchKey: '',
+            searchKey: "",
         };
         const result = await this.relationService.getAllRelation(pagination.page, pagination.size, pagination.searchKey);
         return {
             successCode: 200,
-            successMessage: 'get relation list',
+            successMessage: "get relation list",
             list: result,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createRelation'),
-    (0, swagger_1.ApiOperation)({ summary: 'create relation from this api' }),
+    (0, common_1.Post)("createRelation"),
+    (0, swagger_1.ApiOperation)({ summary: "create relation from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 relationship: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is relationship name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is relationship name*",
                 },
                 type: {
-                    type: 'string',
-                    enum: ['Family', 'Professional', 'Locality'],
-                    description: 'this is type of relation*',
+                    type: "string",
+                    enum: ["Family", "Professional", "Locality"],
+                    description: "this is type of relation*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'relation create',
+        description: "relation create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -97,42 +97,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], RelationController.prototype, "createRelation", null);
 __decorate([
-    (0, common_1.Put)('updateRelation'),
-    (0, swagger_1.ApiOperation)({ summary: 'create relation from this api' }),
+    (0, common_1.Put)("updateRelation"),
+    (0, swagger_1.ApiOperation)({ summary: "create relation from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is your relation id',
+                    type: "string",
+                    example: "any",
+                    description: "this is your relation id",
                 },
                 relationship: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is relationship name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is relationship name*",
                 },
                 type: {
-                    type: 'string',
-                    enum: ['Family', 'Professional', 'Locality'],
-                    description: 'this is type of relation*',
+                    type: "string",
+                    enum: ["Family", "Professional", "Locality"],
+                    description: "this is type of relation*",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is status of relation*',
+                    description: "this is status of relation*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'relation update',
+        description: "relation update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -140,49 +140,49 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], RelationController.prototype, "updateRelation", null);
 __decorate([
-    (0, common_1.Get)('findById/:id'),
-    (0, swagger_1.ApiOperation)({ summary: 'get relation by id from this api' }),
+    (0, common_1.Get)("findById/:id"),
+    (0, swagger_1.ApiOperation)({ summary: "get relation by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'id',
-        example: 'any',
+        name: "id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'relation details',
+        description: "relation details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field arpage: number, size: number, searchKey: stringe required',
+        description: "id field arpage: number, size: number, searchKey: stringe required",
     }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], RelationController.prototype, "getRelationById", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'get all relation from this api' }),
+    (0, swagger_1.ApiOperation)({ summary: "get all relation from this api" }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'relation list',
+        description: "relation list",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'server error',
+        description: "server error",
     }),
-    (0, common_1.Get)('findAll/relation'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("findAll/relation"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], RelationController.prototype, "getAllRelation", null);
 RelationController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    (0, common_1.Controller)('masterSetting'),
-    __param(0, (0, mongoose_1.InjectModel)('relation')),
+    (0, common_1.Controller)("masterSetting"),
+    __param(0, (0, mongoose_1.InjectModel)("relation")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         relation_service_1.RelationService])
 ], RelationController);

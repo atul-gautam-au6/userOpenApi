@@ -25,7 +25,7 @@ const categorySchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'categories',
+    collection: "categories",
 });
 exports.default = categorySchema;
 //# sourceMappingURL=category.schema.js.map

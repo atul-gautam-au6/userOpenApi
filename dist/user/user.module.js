@@ -22,17 +22,13 @@ UserModule = __decorate([
     (0, common_1.Module)({
         imports: [
             axios_1.HttpModule,
-            mongoose_1.MongooseModule.forFeature([{ name: 'user', schema: user_schema_1.default }]),
+            mongoose_1.MongooseModule.forFeature([{ name: "user", schema: user_schema_1.default }]),
             jwt_1.JwtModule.register({
                 secret: `${process.env.JWT_SECRET}`,
-                signOptions: { expiresIn: '1h' },
+                signOptions: { expiresIn: "1h" },
             }),
         ],
-        providers: [
-            user_service_1.UserService,
-            auth_service_1.AuthService,
-            resources_service_1.ResourcesService
-        ],
+        providers: [user_service_1.UserService, auth_service_1.AuthService, resources_service_1.ResourcesService],
         controllers: [
             admin_controller_1.AdminController,
         ],

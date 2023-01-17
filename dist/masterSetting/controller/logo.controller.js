@@ -30,13 +30,13 @@ let LogoController = class LogoController {
         if (!(file === null || file === void 0 ? void 0 : file.filename)) {
             return {
                 errorCode: 500,
-                errorMessage: 'logo is required*',
+                errorMessage: "logo is required*",
             };
         }
         const newLogo = await this.logoService.insertLogo(file === null || file === void 0 ? void 0 : file.filename, data.status);
         return {
             successCode: 201,
-            successMessage: 'logo create success',
+            successMessage: "logo create success",
             list: newLogo,
         };
     }
@@ -44,13 +44,13 @@ let LogoController = class LogoController {
         if (!data.id) {
             return {
                 errorCode: 500,
-                errorMessage: 'logo id is required for update*',
+                errorMessage: "logo id is required for update*",
             };
         }
         const updateLogo = await this.logoService.updateLogo(data.id, file === null || file === void 0 ? void 0 : file.filename, data.status);
         return {
             successCode: 200,
-            successMessage: 'logo update success',
+            successMessage: "logo update success",
             list: updateLogo,
         };
     }
@@ -58,57 +58,57 @@ let LogoController = class LogoController {
         if (!logoId) {
             return {
                 errorCode: 500,
-                errorMessage: 'logo id is required*',
+                errorMessage: "logo id is required*",
             };
         }
         const getLogo = await this.logoService.getLogoById(logoId);
         return {
             successCode: 200,
-            successMessage: 'logo details',
+            successMessage: "logo details",
             list: getLogo,
         };
     }
     async getAllLogo() {
-        const pagination = { page: 1, size: 10, searchKey: '' };
+        const pagination = { page: 1, size: 10, searchKey: "" };
         const getLogo = await this.logoService.getAllLogo(pagination.page, pagination.size, pagination.searchKey);
         return {
             successCode: 200,
-            successMessage: 'all logo',
+            successMessage: "all logo",
             list: getLogo,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createLogo'),
-    (0, swagger_1.ApiOperation)({ summary: 'create logo from this api' }),
-    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, common_1.Post)("createLogo"),
+    (0, swagger_1.ApiOperation)({ summary: "create logo from this api" }),
+    (0, swagger_1.ApiConsumes)("multipart/form-data"),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 logo: {
-                    type: 'string',
-                    format: 'binary',
-                    description: 'this is logo image url *',
+                    type: "string",
+                    format: "binary",
+                    description: "this is logo image url *",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is logo status *',
+                    description: "this is logo status *",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'logo create',
+        description: "logo create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'Internal server error',
+        description: "Internal server error",
     }),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('logo', {
-        dest: 'client/logo/',
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("logo", {
+        dest: "client/logo/",
         limits: {
             fieldSize: 10 * 1024 * 1024,
         },
@@ -120,41 +120,41 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LogoController.prototype, "createLogo", null);
 __decorate([
-    (0, common_1.Put)('/updateLogo'),
-    (0, swagger_1.ApiOperation)({ summary: 'update logo from this api' }),
-    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, common_1.Put)("/updateLogo"),
+    (0, swagger_1.ApiOperation)({ summary: "update logo from this api" }),
+    (0, swagger_1.ApiConsumes)("multipart/form-data"),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is logo id*',
+                    type: "string",
+                    example: "any",
+                    description: "this is logo id*",
                 },
                 logo: {
-                    type: 'string',
-                    format: 'binary',
-                    description: 'this is logo image url *',
+                    type: "string",
+                    format: "binary",
+                    description: "this is logo image url *",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is logo status *',
+                    description: "this is logo status *",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'logo update',
+        description: "logo update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'Internal server error',
+        description: "Internal server error",
     }),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('logo', {
-        dest: 'client/logo/',
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("logo", {
+        dest: "client/logo/",
         limits: {
             fieldSize: 10 * 1024 * 1024,
         },
@@ -166,47 +166,47 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LogoController.prototype, "updateLogo", null);
 __decorate([
-    (0, common_1.Get)('/getById/:logoId'),
-    (0, swagger_1.ApiOperation)({ summary: 'get logo by id from this api' }),
+    (0, common_1.Get)("/getById/:logoId"),
+    (0, swagger_1.ApiOperation)({ summary: "get logo by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'logoId',
-        example: 'any',
+        name: "logoId",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'logo details',
+        description: "logo details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('logoId')),
+    __param(0, (0, common_1.Param)("logoId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], LogoController.prototype, "getLogoById", null);
 __decorate([
-    (0, common_1.Get)('logos'),
-    (0, swagger_1.ApiOperation)({ summary: 'get all logo from this api' }),
+    (0, common_1.Get)("logos"),
+    (0, swagger_1.ApiOperation)({ summary: "get all logo from this api" }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'logo list',
+        description: "logo list",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'server error',
+        description: "server error",
     }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], LogoController.prototype, "getAllLogo", null);
 LogoController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    (0, common_1.Controller)('logo'),
-    __param(0, (0, mongoose_1.InjectModel)('logo')),
+    (0, common_1.Controller)("logo"),
+    __param(0, (0, mongoose_1.InjectModel)("logo")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         logo_service_1.LogoService])
 ], LogoController);

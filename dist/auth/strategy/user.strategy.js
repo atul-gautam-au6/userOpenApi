@@ -14,14 +14,14 @@ const passport_jwt_1 = require("passport-jwt");
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
 const constants_1 = require("../constants");
-let UserStrategy = class UserStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'user') {
+let UserStrategy = class UserStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, "user") {
     constructor() {
         super({
             ignoreExpiration: false,
             secretOrKey: `${constants_1.jwtConstants.secret}`,
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromExtractors([
                 (request) => {
-                    const data = request === null || request === void 0 ? void 0 : request.cookies['auth-cookie'];
+                    const data = request === null || request === void 0 ? void 0 : request.cookies["auth-cookie"];
                     if (!data) {
                         return null;
                     }
@@ -32,7 +32,7 @@ let UserStrategy = class UserStrategy extends (0, passport_1.PassportStrategy)(p
     }
     async validate(payload) {
         if (payload.isAdmin || payload.isSubAdmin) {
-            throw new common_1.UnauthorizedException('You are not valid user');
+            throw new common_1.UnauthorizedException("You are not valid user");
         }
         return { userId: payload.sub, username: payload.username };
     }

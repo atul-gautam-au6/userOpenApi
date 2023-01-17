@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { category } from '../interface/category.interface';
+import { Model } from "mongoose";
+import { category } from "../interface/category.interface";
 export declare class CategoryService {
     private readonly categoryModel;
     constructor(categoryModel: Model<category>);

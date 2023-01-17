@@ -14,7 +14,7 @@ const logoSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'logo',
+    collection: "logo",
 });
 exports.default = logoSchema;
 //# sourceMappingURL=logo.schema.js.map

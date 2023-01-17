@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { specialization } from '../interface/specialization.interface';
+import { Model } from "mongoose";
+import { specialization } from "../interface/specialization.interface";
 export declare class SpecializationService {
     private readonly specializationModel;
     constructor(specializationModel: Model<specialization>);

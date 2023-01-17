@@ -21,18 +21,18 @@ let HealthConditionController = class HealthConditionController {
         this.healthConditionService = healthConditionService;
     }
     async createHealthCondition(data) {
-        console.log(data.HealthCondition, 'medical condtion Name');
+        console.log(data.HealthCondition, "medical condtion Name");
         if (!data.HealthCondition) {
             return {
                 errorCode: 403,
-                message: 'Health condition is Mandatory',
+                message: "Health condition is Mandatory",
             };
         }
         const newHealthCondition = await this.healthConditionService.insertHealthCondition(data.HealthCondition, data.status);
-        console.log(newHealthCondition, 'new Medical condito ');
+        console.log(newHealthCondition, "new Medical condito ");
         return {
             successCode: 201,
-            message: 'Health Created Scucessfully',
+            message: "Health Created Scucessfully",
             list: newHealthCondition,
         };
     }
@@ -45,7 +45,7 @@ let HealthConditionController = class HealthConditionController {
         if (!healthConditionList) {
             return {
                 successCode: 400,
-                message: 'No Health Condtions Found',
+                message: "No Health Condtions Found",
             };
         }
         return {
@@ -57,7 +57,7 @@ let HealthConditionController = class HealthConditionController {
         const updatedHealthcondition = await this.healthConditionService.updateCriticalHistory(data.id, data.HealthCondition, data.status);
         return {
             successCode: 200,
-            message: 'Health Condition updated',
+            message: "Health Condition updated",
             data: updatedHealthcondition,
         };
     }
@@ -65,37 +65,37 @@ let HealthConditionController = class HealthConditionController {
         const getHealthCondition = await this.healthConditionService.getHealthConditionByid(Id);
         return {
             successCode: 200,
-            successMessage: 'Health conditon retrieved',
+            successMessage: "Health conditon retrieved",
             list: getHealthCondition,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createhealthCondition'),
-    (0, swagger_1.ApiOperation)({ summary: 'create medical Condition in this Api' }),
+    (0, common_1.Post)("createhealthCondition"),
+    (0, swagger_1.ApiOperation)({ summary: "create medical Condition in this Api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 HealthCondition: {
-                    type: 'string',
-                    example: 'fever',
-                    description: 'this is the Critical history',
+                    type: "string",
+                    example: "fever",
+                    description: "this is the Critical history",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'true/false',
+                    type: "boolean",
+                    example: "true/false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 202,
-        description: 'Health condition Added',
+        description: "Health condition Added",
     }),
     (0, swagger_1.ApiResponse)({
         status: 400,
-        description: 'Health Condition is Mandatory',
+        description: "Health Condition is Mandatory",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -103,42 +103,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HealthConditionController.prototype, "createHealthCondition", null);
 __decorate([
-    (0, common_1.Get)('getHealthCondition/getAll'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("getHealthCondition/getAll"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], HealthConditionController.prototype, "getAllHealthCondition", null);
 __decorate([
-    (0, common_1.Patch)('updateHealthCondition'),
-    (0, swagger_1.ApiOperation)({ summary: 'update Health from this api' }),
+    (0, common_1.Patch)("updateHealthCondition"),
+    (0, swagger_1.ApiOperation)({ summary: "update Health from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
+                    type: "string",
                 },
                 HealthCondition: {
-                    type: 'string',
-                    example: 'better',
-                    description: 'enter health condition',
+                    type: "string",
+                    example: "better",
+                    description: "enter health condition",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'false',
+                    type: "boolean",
+                    example: "false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Health condition Updated',
+        description: "Health condition Updated",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -146,28 +146,28 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HealthConditionController.prototype, "updateCriticalHistory", null);
 __decorate([
-    (0, common_1.Get)('healthcondition/:Id'),
-    (0, swagger_1.ApiOperation)({ summary: 'get health condition by id from this api' }),
+    (0, common_1.Get)("healthcondition/:Id"),
+    (0, swagger_1.ApiOperation)({ summary: "get health condition by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'Id',
-        example: 'any',
+        name: "Id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'critical Medical condition details',
+        description: "critical Medical condition details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('Id')),
+    __param(0, (0, common_1.Param)("Id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HealthConditionController.prototype, "getHealthconditionById", null);
 HealthConditionController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, common_1.Controller)('admin'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, common_1.Controller)("admin"),
     __metadata("design:paramtypes", [healthcondition_service_1.HealthConditionService])
 ], HealthConditionController);
 exports.HealthConditionController = HealthConditionController;

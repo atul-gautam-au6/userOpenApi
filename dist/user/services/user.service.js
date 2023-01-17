@@ -47,13 +47,13 @@ let UserService = class UserService {
     async getUserById(id) {
         const result = await this.userModel
             .findById(id)
-            .select('-password -isAdmin -isSubAdmin');
+            .select("-password -isAdmin -isSubAdmin");
         return result;
     }
     async getUserByEmail(email) {
         const result = await this.userModel
             .findOne({ email })
-            .select('-password -isAdmin -isSubAdmin');
+            .select("-password -isAdmin -isSubAdmin");
         return result;
     }
     async successVerification(id) {
@@ -69,13 +69,13 @@ let UserService = class UserService {
     async signinUser(email, password) {
         const result = await this.userModel.findOne({ email: email });
         if (!result) {
-            throw new common_1.UnauthorizedException('Invalid Username ');
+            throw new common_1.UnauthorizedException("Invalid Username ");
         }
         if (await result.matchPassword(password)) {
             return result;
         }
         else {
-            throw new common_1.UnauthorizedException('Invalid  Password');
+            throw new common_1.UnauthorizedException("Invalid  Password");
         }
     }
     async searchUser(query, currentUser) {
@@ -85,19 +85,19 @@ let UserService = class UserService {
                     $expr: {
                         $and: [
                             {
-                                $eq: ['$status', true],
+                                $eq: ["$status", true],
                             },
                             {
-                                $eq: ['$emailVerified', true],
+                                $eq: ["$emailVerified", true],
                             },
                             {
-                                $eq: ['$isSubAdmin', false],
+                                $eq: ["$isSubAdmin", false],
                             },
                             {
-                                $eq: ['$isAdmin', false],
+                                $eq: ["$isAdmin", false],
                             },
                             {
-                                $ne: ['$_id', currentUser],
+                                $ne: ["$_id", currentUser],
                             },
                         ],
                     },
@@ -107,9 +107,9 @@ let UserService = class UserService {
                 $match: {
                     $expr: {
                         $regexMatch: {
-                            input: '$name',
+                            input: "$name",
                             regex: query,
-                            options: 'i',
+                            options: "i",
                         },
                     },
                 },
@@ -136,7 +136,7 @@ UserService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
-    __param(0, (0, mongoose_1.InjectModel)('user')),
+    __param(0, (0, mongoose_1.InjectModel)("user")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], UserService);
 exports.UserService = UserService;

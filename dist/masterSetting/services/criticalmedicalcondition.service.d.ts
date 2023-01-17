@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { criticalmedicalcondition } from '../interface/criticalmedicalcondition.interface';
+import { Model } from "mongoose";
+import { criticalmedicalcondition } from "../interface/criticalmedicalcondition.interface";
 export declare class criticalmedicalconditionSevice {
     private readonly criticalMedicalConditionModal;
     constructor(criticalMedicalConditionModal: Model<criticalmedicalcondition>);

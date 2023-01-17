@@ -63,7 +63,7 @@ let HospitalService = class HospitalService {
             {
                 $match: {
                     $expr: {
-                        $eq: ['$status', true],
+                        $eq: ["$status", true],
                     },
                 },
             },
@@ -73,23 +73,23 @@ let HospitalService = class HospitalService {
                         $or: [
                             {
                                 $regexMatch: {
-                                    input: { $toString: '$name' },
+                                    input: { $toString: "$name" },
                                     regex: search,
-                                    options: 'i',
+                                    options: "i",
                                 },
                             },
                             {
                                 $regexMatch: {
-                                    input: { $toString: '$email' },
+                                    input: { $toString: "$email" },
                                     regex: search,
-                                    options: 'i',
+                                    options: "i",
                                 },
                             },
                             {
                                 $regexMatch: {
-                                    input: { $toString: '$phone' },
+                                    input: { $toString: "$phone" },
                                     regex: search,
-                                    options: 'i',
+                                    options: "i",
                                 },
                             },
                         ],
@@ -105,34 +105,34 @@ let HospitalService = class HospitalService {
                 $facet: {
                     total: [
                         {
-                            $count: 'createdAt',
+                            $count: "createdAt",
                         },
                     ],
                     data: [
                         {
                             $addFields: {
-                                _id: '$_id',
+                                _id: "$_id",
                             },
                         },
                     ],
                 },
             },
             {
-                $unwind: '$total',
+                $unwind: "$total",
             },
             {
                 $project: {
                     data: {
                         $slice: [
-                            '$data',
+                            "$data",
                             skip,
                             {
-                                $ifNull: [limit, '$total.createdAt'],
+                                $ifNull: [limit, "$total.createdAt"],
                             },
                         ],
                     },
                     meta: {
-                        total: '$total.createdAt',
+                        total: "$total.createdAt",
                         limit: {
                             $literal: limit,
                         },
@@ -141,7 +141,7 @@ let HospitalService = class HospitalService {
                         },
                         pages: {
                             $ceil: {
-                                $divide: ['$total.createdAt', limit],
+                                $divide: ["$total.createdAt", limit],
                             },
                         },
                     },
@@ -155,7 +155,7 @@ HospitalService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('hospital')),
+    __param(0, (0, mongoose_1.InjectModel)("hospital")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         resources_service_1.ResourcesService])
 ], HospitalService);

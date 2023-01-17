@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { Treatment } from '../interface/treatment.interface';
+import { Model } from "mongoose";
+import { Treatment } from "../interface/treatment.interface";
 export declare class TreatmentService {
     private readonly TreatmentModal;
     constructor(TreatmentModal: Model<Treatment>);

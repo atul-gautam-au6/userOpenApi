@@ -21,18 +21,18 @@ let TreatmentController = class TreatmentController {
         this.TreatmentService = TreatmentService;
     }
     async createTreatment(data) {
-        console.log(data.TreatmentName, 'medical condtion Name');
+        console.log(data.TreatmentName, "medical condtion Name");
         if (!data.TreatmentName) {
             return {
                 errorCode: 403,
-                message: 'Treatment Name is Mandatory',
+                message: "Treatment Name is Mandatory",
             };
         }
         const newTreatment = await this.TreatmentService.insertTreatment(data.TreatmentName, data.status);
-        console.log(newTreatment, 'new Medical condito ');
+        console.log(newTreatment, "new Medical condito ");
         return {
             successCode: 201,
-            message: 'Treatment Created Scucessfully',
+            message: "Treatment Created Scucessfully",
             list: newTreatment,
         };
     }
@@ -45,7 +45,7 @@ let TreatmentController = class TreatmentController {
         if (!treatmentList) {
             return {
                 successCode: 400,
-                message: 'No Treatments Found',
+                message: "No Treatments Found",
             };
         }
         return {
@@ -57,7 +57,7 @@ let TreatmentController = class TreatmentController {
         const updatedTreatment = await this.TreatmentService.updateTreatment(data.id, data.TreatmentName, data.status);
         return {
             successCode: 200,
-            message: 'Treatment updated',
+            message: "Treatment updated",
             data: updatedTreatment,
         };
     }
@@ -65,37 +65,37 @@ let TreatmentController = class TreatmentController {
         const getTreatment = await this.TreatmentService.getTreatmentByid(Id);
         return {
             successCode: 200,
-            successMessage: 'Treatment  details',
+            successMessage: "Treatment  details",
             list: getTreatment,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createTreatment'),
-    (0, swagger_1.ApiOperation)({ summary: 'create Treatment in this Api' }),
+    (0, common_1.Post)("createTreatment"),
+    (0, swagger_1.ApiOperation)({ summary: "create Treatment in this Api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 TreatmentName: {
-                    type: 'string',
-                    example: 'go for tests',
-                    description: 'this is the Treatment name',
+                    type: "string",
+                    example: "go for tests",
+                    description: "this is the Treatment name",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'true/false',
+                    type: "boolean",
+                    example: "true/false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 202,
-        description: 'Treatment Added',
+        description: "Treatment Added",
     }),
     (0, swagger_1.ApiResponse)({
         status: 400,
-        description: 'Treatment Name is Mandatory',
+        description: "Treatment Name is Mandatory",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -103,42 +103,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TreatmentController.prototype, "createTreatment", null);
 __decorate([
-    (0, common_1.Get)('getTreatments/getAll'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("getTreatments/getAll"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], TreatmentController.prototype, "getAllTreatments", null);
 __decorate([
-    (0, common_1.Patch)('updateTreatment'),
-    (0, swagger_1.ApiOperation)({ summary: 'update Treatment from this api' }),
+    (0, common_1.Patch)("updateTreatment"),
+    (0, swagger_1.ApiOperation)({ summary: "update Treatment from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
+                    type: "string",
                 },
                 TreatmentName: {
-                    type: 'string',
-                    example: 'better',
-                    description: 'enter Treatment Name',
+                    type: "string",
+                    example: "better",
+                    description: "enter Treatment Name",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'false',
+                    type: "boolean",
+                    example: "false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Treatment Updated',
+        description: "Treatment Updated",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -146,28 +146,28 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TreatmentController.prototype, "updateTreatment", null);
 __decorate([
-    (0, common_1.Get)('treatment/:Id'),
-    (0, swagger_1.ApiOperation)({ summary: 'get treatment by id from this api' }),
+    (0, common_1.Get)("treatment/:Id"),
+    (0, swagger_1.ApiOperation)({ summary: "get treatment by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'Id',
-        example: 'any',
+        name: "Id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'treatmetn details',
+        description: "treatmetn details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('Id')),
+    __param(0, (0, common_1.Param)("Id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], TreatmentController.prototype, "getTreatmentById", null);
 TreatmentController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, common_1.Controller)('admin'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, common_1.Controller)("admin"),
     __metadata("design:paramtypes", [treatment_service_1.TreatmentService])
 ], TreatmentController);
 exports.TreatmentController = TreatmentController;

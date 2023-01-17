@@ -16,7 +16,7 @@ const specializationSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'specialization',
+    collection: "specialization",
 });
 exports.default = specializationSchema;
 //# sourceMappingURL=specialization.schema.js.map

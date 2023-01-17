@@ -31,15 +31,15 @@ let criticalmedicalconditionSevice = class criticalmedicalconditionSevice {
             return newMedicalCondition;
         }
         catch (error) {
-            throw new common_1.NotFoundException('could not insert');
+            throw new common_1.NotFoundException("could not insert");
         }
     }
     async getAllCriticalMedicalCondition(page, pageSize) {
-        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, '');
+        const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, pageSize, "");
         try {
             const criticalMedicalcondtionList = await this.criticalMedicalConditionModal
                 .find({})
-                .sort({ MedicalConditionName: 'asc', _id: 'desc' })
+                .sort({ MedicalConditionName: "asc", _id: "desc" })
                 .limit(limit)
                 .skip(skip);
             const count = await this.criticalMedicalConditionModal.count().exec();
@@ -65,7 +65,7 @@ let criticalmedicalconditionSevice = class criticalmedicalconditionSevice {
             return updatedProduct;
         }
         catch (error) {
-            throw new common_1.NotFoundException('Could not found Data');
+            throw new common_1.NotFoundException("Could not found Data");
         }
     }
     async getCriticalMedicalConditionByid(id) {
@@ -75,7 +75,7 @@ let criticalmedicalconditionSevice = class criticalmedicalconditionSevice {
 };
 criticalmedicalconditionSevice = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('criticalmedicalcondition')),
+    __param(0, (0, mongoose_1.InjectModel)("criticalmedicalcondition")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], criticalmedicalconditionSevice);
 exports.criticalmedicalconditionSevice = criticalmedicalconditionSevice;

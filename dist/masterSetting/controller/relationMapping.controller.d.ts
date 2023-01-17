@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { relation } from '../interface/relation.interface';
-import { RelationService } from '../services/relation.service';
+import { Model } from "mongoose";
+import { relation } from "../interface/relation.interface";
+import { RelationService } from "../services/relation.service";
 export declare class RelationController {
     private readonly relationModel;
     private readonly relationService;

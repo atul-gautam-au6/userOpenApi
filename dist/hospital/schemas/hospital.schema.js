@@ -14,7 +14,7 @@ const hospitalSchema = new mongoose.Schema({
         require: true,
         unique: true,
         trim: true,
-        validate: [email_validator_1.validateEmail, 'Please fill a valid email address'],
+        validate: [email_validator_1.validateEmail, "Please fill a valid email address"],
     },
     phone: {
         type: Number,
@@ -27,21 +27,21 @@ const hospitalSchema = new mongoose.Schema({
     },
     point: {
         type: {
-            type: 'String',
-            enum: ['Point', 'LineString', 'Polygon'],
-            default: 'Point',
+            type: "String",
+            enum: ["Point", "LineString", "Polygon"],
+            default: "Point",
         },
         coordinates: [Number],
     },
     bannerImage: {
         type: String,
         require: true,
-        default: '',
+        default: "",
     },
     image: {
         type: String,
         require: true,
-        default: '',
+        default: "",
     },
     description: {
         type: String,
@@ -56,8 +56,8 @@ const hospitalSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'hospital',
+    collection: "hospital",
 });
-hospitalSchema.index({ point: '2dsphere' });
+hospitalSchema.index({ point: "2dsphere" });
 exports.default = hospitalSchema;
 //# sourceMappingURL=hospital.schema.js.map

@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { logo } from '../interface/logo.interface';
-import { LogoService } from '../services/logo.service';
+import { Model } from "mongoose";
+import { logo } from "../interface/logo.interface";
+import { LogoService } from "../services/logo.service";
 export declare class LogoController {
     private readonly logoModel;
     private readonly logoService;

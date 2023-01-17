@@ -21,30 +21,30 @@ let MedicineController = class MedicineController {
         this.MedicineService = MedicineService;
     }
     async createMedicine(data) {
-        console.log(data.MedicineName, 'medical condtion Name');
+        console.log(data.MedicineName, "medical condtion Name");
         if (!data.MedicineName) {
             return {
                 errorCode: 403,
-                message: 'Medicine Name is Mandatory',
+                message: "Medicine Name is Mandatory",
             };
         }
         if (!data.Manufacturer) {
             return {
                 errorCode: 403,
-                message: 'Manufacturer Name is Mandatory',
+                message: "Manufacturer Name is Mandatory",
             };
         }
         if (!data.Salt) {
             return {
                 errorCode: 403,
-                message: 'Salt Name is Mandatory',
+                message: "Salt Name is Mandatory",
             };
         }
         const newMedicine = await this.MedicineService.insertMedicine(data.MedicineName, data.Manufacturer, data.Salt, data.status);
-        console.log(newMedicine, 'new Medical condito ');
+        console.log(newMedicine, "new Medical condito ");
         return {
             successCode: 201,
-            message: 'Medicine Created Scucessfully',
+            message: "Medicine Created Scucessfully",
             list: newMedicine,
         };
     }
@@ -57,7 +57,7 @@ let MedicineController = class MedicineController {
         if (!medicineList) {
             return {
                 successCode: 400,
-                message: 'No Medicines Found',
+                message: "No Medicines Found",
             };
         }
         return {
@@ -69,7 +69,7 @@ let MedicineController = class MedicineController {
         const updatedMedicine = await this.MedicineService.updateMedicine(data.id, data.MedicineName, data.Manufacturer, data.Salt, data.status);
         return {
             successCode: 200,
-            message: 'Medicine updated',
+            message: "Medicine updated",
             data: updatedMedicine,
         };
     }
@@ -77,47 +77,47 @@ let MedicineController = class MedicineController {
         const getMedicine = await this.MedicineService.getMedicineByid(Id);
         return {
             successCode: 200,
-            successMessage: 'Medicine  details',
+            successMessage: "Medicine  details",
             list: getMedicine,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createMedicine'),
-    (0, swagger_1.ApiOperation)({ summary: 'create Medicine in this Api' }),
+    (0, common_1.Post)("createMedicine"),
+    (0, swagger_1.ApiOperation)({ summary: "create Medicine in this Api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 MedicineName: {
-                    type: 'string',
-                    example: 'Paracetemol',
-                    description: 'this is the Medicine name',
+                    type: "string",
+                    example: "Paracetemol",
+                    description: "this is the Medicine name",
                 },
                 Manufacturer: {
-                    type: 'string',
-                    example: 'Farmson',
-                    description: 'Enter the manufacturer name of the medicine',
+                    type: "string",
+                    example: "Farmson",
+                    description: "Enter the manufacturer name of the medicine",
                 },
                 Salt: {
-                    type: 'string',
-                    example: 'enter the salt name here',
-                    description: '',
+                    type: "string",
+                    example: "enter the salt name here",
+                    description: "",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'true/false',
+                    type: "boolean",
+                    example: "true/false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 202,
-        description: 'Medicine Added',
+        description: "Medicine Added",
     }),
     (0, swagger_1.ApiResponse)({
         status: 400,
-        description: 'Fields are  Mandatory',
+        description: "Fields are  Mandatory",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -125,52 +125,52 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], MedicineController.prototype, "createMedicine", null);
 __decorate([
-    (0, common_1.Get)('getMedicines/getAll'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("getMedicines/getAll"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], MedicineController.prototype, "getAllMedicines", null);
 __decorate([
-    (0, common_1.Patch)('updateMedicine'),
-    (0, swagger_1.ApiOperation)({ summary: 'update Medicine from this api' }),
+    (0, common_1.Patch)("updateMedicine"),
+    (0, swagger_1.ApiOperation)({ summary: "update Medicine from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
+                    type: "string",
                 },
                 MedicineName: {
-                    type: 'string',
-                    example: 'Paracetemol',
-                    description: 'this is the Medicine name',
+                    type: "string",
+                    example: "Paracetemol",
+                    description: "this is the Medicine name",
                 },
                 Manufacturer: {
-                    type: 'string',
-                    example: 'Farmson',
-                    description: 'Enter the manufacturer name of the medicine',
+                    type: "string",
+                    example: "Farmson",
+                    description: "Enter the manufacturer name of the medicine",
                 },
                 Salt: {
-                    type: 'string',
-                    example: 'enter the salt name here',
-                    description: '',
+                    type: "string",
+                    example: "enter the salt name here",
+                    description: "",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'true/false',
+                    type: "boolean",
+                    example: "true/false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Medicine Updated',
+        description: "Medicine Updated",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -178,28 +178,28 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], MedicineController.prototype, "updateMedicine", null);
 __decorate([
-    (0, common_1.Get)('medicine/:Id'),
-    (0, swagger_1.ApiOperation)({ summary: 'get medicine by id from this api' }),
+    (0, common_1.Get)("medicine/:Id"),
+    (0, swagger_1.ApiOperation)({ summary: "get medicine by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'Id',
-        example: 'any',
+        name: "Id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Medicine details',
+        description: "Medicine details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('Id')),
+    __param(0, (0, common_1.Param)("Id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], MedicineController.prototype, "getMedicineById", null);
 MedicineController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, common_1.Controller)('admin'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, common_1.Controller)("admin"),
     __metadata("design:paramtypes", [medicines_service_1.MedicinesService])
 ], MedicineController);
 exports.MedicineController = MedicineController;

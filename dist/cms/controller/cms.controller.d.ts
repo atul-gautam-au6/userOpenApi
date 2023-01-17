@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { CmsService } from '../service/cms.service';
-import { cms } from '../interface/cms.interface';
+import { Model } from "mongoose";
+import { CmsService } from "../service/cms.service";
+import { cms } from "../interface/cms.interface";
 export declare class CmsController {
     private readonly cmsModel;
     private cmsService;

@@ -1,6 +1,6 @@
-import { Model } from 'mongoose';
-import { location } from '../interface/location.interface';
-import { LocationService } from '../services/location.service';
+import { Model } from "mongoose";
+import { location } from "../interface/location.interface";
+import { LocationService } from "../services/location.service";
 export declare class LocationController {
     private readonly locationModel;
     private readonly locationService;

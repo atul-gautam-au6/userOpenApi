@@ -13,7 +13,7 @@ const healthConditionSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'healthcondition',
+    collection: "healthcondition",
 });
 exports.default = healthConditionSchema;
 //# sourceMappingURL=healthcondition.schema.js.map

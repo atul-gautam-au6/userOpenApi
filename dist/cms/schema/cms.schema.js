@@ -22,7 +22,7 @@ const cmsSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    collection: 'cms',
+    collection: "cms",
 });
 exports.default = cmsSchema;
 //# sourceMappingURL=cms.schema.js.map

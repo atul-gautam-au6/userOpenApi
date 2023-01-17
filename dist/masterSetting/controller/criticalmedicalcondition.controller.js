@@ -21,18 +21,18 @@ let CriticalMedicalConditionController = class CriticalMedicalConditionControlle
         this.criticalMedicalConditonService = criticalMedicalConditonService;
     }
     async createMedicalCondition(data) {
-        console.log(data.MedicalConditionName, 'medical condtion Name');
+        console.log(data.MedicalConditionName, "medical condtion Name");
         if (!data.MedicalConditionName) {
             return {
                 errorCode: 403,
-                message: 'Please Enter Medical Condtion',
+                message: "Please Enter Medical Condtion",
             };
         }
         const newMedicalcondition = await this.criticalMedicalConditonService.insertCriticalMedicalCondition(data.MedicalConditionName, data.status);
-        console.log(newMedicalcondition, 'new Medical condito ');
+        console.log(newMedicalcondition, "new Medical condito ");
         return {
             successCode: 201,
-            message: 'Medical condition Created Scucessfully',
+            message: "Medical condition Created Scucessfully",
             list: newMedicalcondition,
         };
     }
@@ -45,7 +45,7 @@ let CriticalMedicalConditionController = class CriticalMedicalConditionControlle
         if (!criticalMedicalConditionList) {
             return {
                 successCode: 400,
-                message: 'No Medical Condtions Found',
+                message: "No Medical Condtions Found",
             };
         }
         return {
@@ -57,7 +57,7 @@ let CriticalMedicalConditionController = class CriticalMedicalConditionControlle
         const updatedCriticalMedicalcondtion = await this.criticalMedicalConditonService.updateMedicalCondition(data.id, data.MedicalConditionName, data.status);
         return {
             successCode: 200,
-            message: 'Medical condition updated',
+            message: "Medical condition updated",
             data: updatedCriticalMedicalcondtion,
         };
     }
@@ -65,37 +65,37 @@ let CriticalMedicalConditionController = class CriticalMedicalConditionControlle
         const getCriticalMedicalCondition = await this.criticalMedicalConditonService.getCriticalMedicalConditionByid(Id);
         return {
             successCode: 200,
-            successMessage: 'Critical history  detail',
+            successMessage: "Critical history  detail",
             list: getCriticalMedicalCondition,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createCriticalMedicalCondition'),
-    (0, swagger_1.ApiOperation)({ summary: 'create medical Condition in this Api' }),
+    (0, common_1.Post)("createCriticalMedicalCondition"),
+    (0, swagger_1.ApiOperation)({ summary: "create medical Condition in this Api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 MedicalConditionName: {
-                    type: 'string',
-                    example: 'fever',
-                    description: 'this is the medical condtion',
+                    type: "string",
+                    example: "fever",
+                    description: "this is the medical condtion",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'true/false',
+                    type: "boolean",
+                    example: "true/false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 202,
-        description: 'Medical Condition Added',
+        description: "Medical Condition Added",
     }),
     (0, swagger_1.ApiResponse)({
         status: 400,
-        description: 'Medical condtion Name is required',
+        description: "Medical condtion Name is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -103,42 +103,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CriticalMedicalConditionController.prototype, "createMedicalCondition", null);
 __decorate([
-    (0, common_1.Get)('getCriticalMedicalCondition/getAll'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
+    (0, common_1.Get)("getCriticalMedicalCondition/getAll"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], CriticalMedicalConditionController.prototype, "getAllCriticalMedicalCondition", null);
 __decorate([
-    (0, common_1.Patch)('updateCriticalMedicalCondition'),
-    (0, swagger_1.ApiOperation)({ summary: 'update Critcal Medical Condition from this api' }),
+    (0, common_1.Patch)("updateCriticalMedicalCondition"),
+    (0, swagger_1.ApiOperation)({ summary: "update Critcal Medical Condition from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
+                    type: "string",
                 },
                 MedicalConditionName: {
-                    type: 'string',
-                    example: 'fever/any',
-                    description: 'enter medical condition Name',
+                    type: "string",
+                    example: "fever/any",
+                    description: "enter medical condition Name",
                 },
                 status: {
-                    type: 'boolean',
-                    example: 'false',
+                    type: "boolean",
+                    example: "false",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Medical Critical condition Update',
+        description: "Medical Critical condition Update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -146,30 +146,30 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CriticalMedicalConditionController.prototype, "updateCriticalMedicalCondition", null);
 __decorate([
-    (0, common_1.Get)('criticalMedicalcondition/:Id'),
+    (0, common_1.Get)("criticalMedicalcondition/:Id"),
     (0, swagger_1.ApiOperation)({
-        summary: 'get critical medical condiiton by id from this api',
+        summary: "get critical medical condiiton by id from this api",
     }),
     (0, swagger_1.ApiParam)({
-        name: 'Id',
-        example: 'any',
+        name: "Id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'critical Medical condition details',
+        description: "critical Medical condition details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('Id')),
+    __param(0, (0, common_1.Param)("Id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CriticalMedicalConditionController.prototype, "getCriticalMedicalconditionById", null);
 CriticalMedicalConditionController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, common_1.Controller)('admin'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, common_1.Controller)("admin"),
     __metadata("design:paramtypes", [criticalmedicalcondition_service_1.criticalmedicalconditionSevice])
 ], CriticalMedicalConditionController);
 exports.CriticalMedicalConditionController = CriticalMedicalConditionController;

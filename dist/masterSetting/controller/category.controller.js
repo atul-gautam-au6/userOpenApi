@@ -29,13 +29,13 @@ let CategoryController = class CategoryController {
         if (!data.name || !data.status) {
             return {
                 errorCode: 403,
-                errorMessage: 'Name and status fields are required*',
+                errorMessage: "Name and status fields are required*",
             };
         }
         const newCategory = await this.categoryService.insertCategory(data.name, data.status, false, false);
         return {
             successCode: 201,
-            successMessage: 'category create success',
+            successMessage: "category create success",
             list: newCategory,
         };
     }
@@ -43,7 +43,7 @@ let CategoryController = class CategoryController {
         const getcategory = await this.categoryService.updateCategory(data.id, data.name, data.status, false, false);
         return {
             successCode: 200,
-            successMessage: 'category update success',
+            successMessage: "category update success",
             list: getcategory,
         };
     }
@@ -51,7 +51,7 @@ let CategoryController = class CategoryController {
         const getCategory = await this.categoryService.getCategoryByid(categoryId);
         return {
             successCode: 200,
-            successMessage: 'category details ',
+            successMessage: "category details ",
             list: getCategory,
         };
     }
@@ -59,7 +59,7 @@ let CategoryController = class CategoryController {
         const newCategory = await this.categoryService.insertCategory(data.name, data.status, true, false);
         return {
             successCode: 201,
-            successMessage: 'category podcast create success',
+            successMessage: "category podcast create success",
             list: newCategory,
         };
     }
@@ -67,7 +67,7 @@ let CategoryController = class CategoryController {
         const getCategory = await this.categoryService.updateCategory(data.id, data.name, data.status, true, false);
         return {
             successCode: 200,
-            successMessage: 'category podcats update success ',
+            successMessage: "category podcats update success ",
             list: getCategory,
         };
     }
@@ -75,7 +75,7 @@ let CategoryController = class CategoryController {
         const getCategory = await this.categoryService.getCategoryByid(categoryId);
         return {
             successCode: 200,
-            successMessage: 'category podcats detail  ',
+            successMessage: "category podcats detail  ",
             list: getCategory,
         };
     }
@@ -83,7 +83,7 @@ let CategoryController = class CategoryController {
         const newCategory = await this.categoryService.insertCategory(data.name, data.status, false, true);
         return {
             successCode: 201,
-            successMessage: 'category question create success',
+            successMessage: "category question create success",
             list: newCategory,
         };
     }
@@ -91,7 +91,7 @@ let CategoryController = class CategoryController {
         const getCategory = await this.categoryService.updateCategory(data.id, data.name, data.status, false, true);
         return {
             successCode: 200,
-            successMessage: 'category question detail',
+            successMessage: "category question detail",
             list: getCategory,
         };
     }
@@ -99,7 +99,7 @@ let CategoryController = class CategoryController {
         const getCategory = await this.categoryService.getCategoryByid(categoryId);
         return {
             successCode: 200,
-            successMessage: 'category question detail  ',
+            successMessage: "category question detail  ",
             list: getCategory,
         };
     }
@@ -107,43 +107,43 @@ let CategoryController = class CategoryController {
         const pagination = {
             page: newPage || 1,
             size: pageSize || 10,
-            searchKey: searchKey || '',
+            searchKey: searchKey || "",
         };
         const result = await this.categoryService.getAllCategory(pagination.page, pagination.size, pagination.searchKey, type);
         return {
             successCod: 200,
-            successMessage: 'all categories list',
+            successMessage: "all categories list",
             list: result,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createCategory'),
-    (0, swagger_1.ApiOperation)({ summary: 'create category  from this api' }),
+    (0, common_1.Post)("createCategory"),
+    (0, swagger_1.ApiOperation)({ summary: "create category  from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is category name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is category name*",
                 },
                 status: {
-                    type: 'booelan',
+                    type: "booelan",
                     example: true,
-                    description: 'this is status of category*',
+                    description: "this is status of category*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'category create',
+        description: "category create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -151,37 +151,37 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "createCategory", null);
 __decorate([
-    (0, common_1.Put)('updateCategory'),
-    (0, swagger_1.ApiOperation)({ summary: 'update category  from this api' }),
+    (0, common_1.Put)("updateCategory"),
+    (0, swagger_1.ApiOperation)({ summary: "update category  from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is your category',
+                    type: "string",
+                    example: "any",
+                    description: "this is your category",
                 },
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is category name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is category name*",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is status of category*',
+                    description: "this is status of category*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'category update',
+        description: "category update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -189,52 +189,52 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "updateCategory", null);
 __decorate([
-    (0, common_1.Get)('category/:categoryId'),
-    (0, swagger_1.ApiOperation)({ summary: 'get category by id from this api' }),
+    (0, common_1.Get)("category/:categoryId"),
+    (0, swagger_1.ApiOperation)({ summary: "get category by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'categoryId',
-        example: 'any',
+        name: "categoryId",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'category details',
+        description: "category details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('categoryId')),
+    __param(0, (0, common_1.Param)("categoryId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "getCategoryById", null);
 __decorate([
-    (0, common_1.Post)('createCategoryPodcast'),
-    (0, swagger_1.ApiOperation)({ summary: 'create category podcast from this api' }),
+    (0, common_1.Post)("createCategoryPodcast"),
+    (0, swagger_1.ApiOperation)({ summary: "create category podcast from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is category podcast name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is category podcast name*",
                 },
                 isPodcast: {
-                    type: 'booelan',
+                    type: "booelan",
                     example: true,
-                    description: 'this is status of category podcast*',
+                    description: "this is status of category podcast*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'category podcast create',
+        description: "category podcast create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -242,37 +242,37 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "createCategoryPodcast", null);
 __decorate([
-    (0, common_1.Put)('updateCategoryPodcast'),
-    (0, swagger_1.ApiOperation)({ summary: 'update category podcast from this api' }),
+    (0, common_1.Put)("updateCategoryPodcast"),
+    (0, swagger_1.ApiOperation)({ summary: "update category podcast from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is your category podcast',
+                    type: "string",
+                    example: "any",
+                    description: "this is your category podcast",
                 },
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is category podcast name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is category podcast name*",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is status of category*',
+                    description: "this is status of category*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'category update',
+        description: "category update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -280,52 +280,52 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "updateCategoryPodcast", null);
 __decorate([
-    (0, common_1.Get)('categoryPodcast/:categoryId'),
-    (0, swagger_1.ApiOperation)({ summary: 'get category podcats by id from this api' }),
+    (0, common_1.Get)("categoryPodcast/:categoryId"),
+    (0, swagger_1.ApiOperation)({ summary: "get category podcats by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'categoryId',
-        example: 'any',
+        name: "categoryId",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'category podcats details',
+        description: "category podcats details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('categoryId')),
+    __param(0, (0, common_1.Param)("categoryId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "getCategoryPodcastById", null);
 __decorate([
-    (0, common_1.Post)('createCategoryQuestion'),
-    (0, swagger_1.ApiOperation)({ summary: 'create category question from this api' }),
+    (0, common_1.Post)("createCategoryQuestion"),
+    (0, swagger_1.ApiOperation)({ summary: "create category question from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is category question name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is category question name*",
                 },
                 status: {
-                    type: 'booelan',
+                    type: "booelan",
                     example: true,
-                    description: 'this is status of category question*',
+                    description: "this is status of category question*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'category create',
+        description: "category create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Body)()),
@@ -334,37 +334,37 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "createCategoryQuestion", null);
 __decorate([
-    (0, common_1.Put)('updateCategoryQuestion'),
-    (0, swagger_1.ApiOperation)({ summary: 'update category question from this api' }),
+    (0, common_1.Put)("updateCategoryQuestion"),
+    (0, swagger_1.ApiOperation)({ summary: "update category question from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is your category question',
+                    type: "string",
+                    example: "any",
+                    description: "this is your category question",
                 },
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is category name question*',
+                    type: "string",
+                    example: "any",
+                    description: "this is category name question*",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is status of category question*',
+                    description: "this is status of category question*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'category update',
+        description: "category update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field is required',
+        description: "id field is required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -372,42 +372,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "updateCategoryQuestion", null);
 __decorate([
-    (0, common_1.Get)('categoryQuestion/:categoryId'),
-    (0, swagger_1.ApiOperation)({ summary: 'get category question by id from this api' }),
+    (0, common_1.Get)("categoryQuestion/:categoryId"),
+    (0, swagger_1.ApiOperation)({ summary: "get category question by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'categoryId',
-        example: 'any',
+        name: "categoryId",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'category question details',
+        description: "category question details",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'id field are required',
+        description: "id field are required",
     }),
-    __param(0, (0, common_1.Param)('categoryId')),
+    __param(0, (0, common_1.Param)("categoryId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "getCategoryQuById", null);
 __decorate([
-    (0, common_1.Get)('categories/getAll'),
-    __param(0, (0, common_1.Query)('pageSize')),
-    __param(1, (0, common_1.Query)('newPage')),
-    __param(2, (0, common_1.Query)('searchKey')),
-    __param(3, (0, common_1.Query)('type')),
+    (0, common_1.Get)("categories/getAll"),
+    __param(0, (0, common_1.Query)("pageSize")),
+    __param(1, (0, common_1.Query)("newPage")),
+    __param(2, (0, common_1.Query)("searchKey")),
+    __param(3, (0, common_1.Query)("type")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number, String, String]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "getAllcategories", null);
 CategoryController = __decorate([
-    (0, swagger_1.ApiTags)('master-setting'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("master-setting"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    (0, common_1.Controller)('admin'),
-    __param(0, (0, mongoose_1.InjectModel)('category')),
+    (0, common_1.Controller)("admin"),
+    __param(0, (0, mongoose_1.InjectModel)("category")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         category_service_1.CategoryService])
 ], CategoryController);

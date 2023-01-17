@@ -20,7 +20,7 @@ HospitalModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 {
-                    name: 'hospital',
+                    name: "hospital",
                     schema: hospital_schema_1.default,
                 },
             ]),

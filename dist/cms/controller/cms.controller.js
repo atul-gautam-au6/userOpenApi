@@ -29,7 +29,7 @@ let CmsController = class CmsController {
         const newCms = await this.cmsService.insertCms(data.name, data.description);
         return {
             successCode: 201,
-            successMessage: 'cms create sucess',
+            successMessage: "cms create sucess",
             list: newCms,
         };
     }
@@ -37,7 +37,7 @@ let CmsController = class CmsController {
         const result = await this.cmsService.updateCms(data.id, data.name, data.description, data.status);
         return {
             successCode: 200,
-            successMessage: 'cms update',
+            successMessage: "cms update",
             list: result,
         };
     }
@@ -45,47 +45,47 @@ let CmsController = class CmsController {
         const result = await this.cmsService.getCmsById(id);
         return {
             successCode: 200,
-            successMessage: 'cms details',
+            successMessage: "cms details",
             list: result,
         };
     }
     async getAllCms() {
-        const pagination = { page: 1, size: 10, searchKey: '' };
+        const pagination = { page: 1, size: 10, searchKey: "" };
         const result = await this.cmsService.getAllCms(pagination.page, pagination.size, pagination.searchKey);
         return {
             successCode: 200,
-            successMessage: 'cms list',
+            successMessage: "cms list",
             list: result,
         };
     }
 };
 __decorate([
-    (0, common_1.Post)('createCms'),
-    (0, swagger_1.ApiOperation)({ summary: 'create cms page from this api' }),
+    (0, common_1.Post)("createCms"),
+    (0, swagger_1.ApiOperation)({ summary: "create cms page from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is cms page name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is cms page name*",
                 },
                 description: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is cms page description*',
+                    type: "string",
+                    example: "any",
+                    description: "this is cms page description*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'cms create',
+        description: "cms create",
     }),
     (0, swagger_1.ApiResponse)({
         status: 403,
-        description: 'All field are required',
+        description: "All field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -93,42 +93,42 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CmsController.prototype, "createCms", null);
 __decorate([
-    (0, common_1.Put)('updateCms'),
-    (0, swagger_1.ApiOperation)({ summary: 'update cms page from this api' }),
+    (0, common_1.Put)("updateCms"),
+    (0, swagger_1.ApiOperation)({ summary: "update cms page from this api" }),
     (0, swagger_1.ApiBody)({
         schema: {
-            type: 'object',
+            type: "object",
             properties: {
                 id: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is cms page id*',
+                    type: "string",
+                    example: "any",
+                    description: "this is cms page id*",
                 },
                 name: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is cms page name*',
+                    type: "string",
+                    example: "any",
+                    description: "this is cms page name*",
                 },
                 description: {
-                    type: 'string',
-                    example: 'any',
-                    description: 'this is cms page description*',
+                    type: "string",
+                    example: "any",
+                    description: "this is cms page description*",
                 },
                 status: {
-                    type: 'boolean',
+                    type: "boolean",
                     example: true,
-                    description: 'this is cms page status*',
+                    description: "this is cms page status*",
                 },
             },
         },
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'cms update',
+        description: "cms update",
     }),
     (0, swagger_1.ApiResponse)({
         status: 204,
-        description: 'id field are required',
+        description: "id field are required",
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -136,48 +136,48 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CmsController.prototype, "updateCms", null);
 __decorate([
-    (0, common_1.Get)('findOne/:id'),
-    (0, swagger_1.ApiOperation)({ summary: 'get cms page by id from this api' }),
+    (0, common_1.Get)("findOne/:id"),
+    (0, swagger_1.ApiOperation)({ summary: "get cms page by id from this api" }),
     (0, swagger_1.ApiParam)({
-        name: 'id',
-        example: 'any',
+        name: "id",
+        example: "any",
     }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'cms detals',
+        description: "cms detals",
     }),
     (0, swagger_1.ApiResponse)({
         status: 204,
-        description: 'id is required',
+        description: "id is required",
     }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CmsController.prototype, "getCmsById", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'get all cms list from this api' }),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiOperation)({ summary: "get all cms list from this api" }),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'get all cms ',
+        description: "get all cms ",
     }),
     (0, swagger_1.ApiResponse)({
         status: 500,
-        description: 'Something went wrong',
+        description: "Something went wrong",
     }),
-    (0, common_1.Get)('findAll/cms'),
+    (0, common_1.Get)("findAll/cms"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CmsController.prototype, "getAllCms", null);
 CmsController = __decorate([
-    (0, swagger_1.ApiTags)('cms'),
-    (0, swagger_1.ApiSecurity)('bearer'),
+    (0, swagger_1.ApiTags)("cms"),
+    (0, swagger_1.ApiSecurity)("bearer"),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    (0, common_1.Controller)('cms'),
-    __param(0, (0, mongoose_1.InjectModel)('cms')),
+    (0, common_1.Controller)("cms"),
+    __param(0, (0, mongoose_1.InjectModel)("cms")),
     __metadata("design:paramtypes", [mongoose_2.Model,
         cms_service_1.CmsService])
 ], CmsController);

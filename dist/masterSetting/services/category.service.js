@@ -44,13 +44,13 @@ let CategoryService = class CategoryService {
     async getCategoryByid(id) {
         const result = await this.categoryModel
             .findById(id)
-            .select('-isQuetion -isPodcast');
+            .select("-isQuetion -isPodcast");
         return result;
     }
     async getAllCategory(page, size, searchKey, type) {
         const { limit, skip, search } = (0, email_validator_1.paginationUsable)(page, size, searchKey);
-        const isPodcast = type == 'isPodcast' ? true : false;
-        const isQuetion = type == 'isQuetion' ? true : false;
+        const isPodcast = type == "isPodcast" ? true : false;
+        const isQuetion = type == "isQuetion" ? true : false;
         const result = await this.categoryModel.aggregate([
             {
                 $match: {
@@ -58,21 +58,21 @@ let CategoryService = class CategoryService {
                         $and: !isPodcast && !isQuetion
                             ? [
                                 {
-                                    $eq: ['$isPodcast', false],
+                                    $eq: ["$isPodcast", false],
                                 },
                                 {
-                                    $eq: ['$isQuetion', false],
+                                    $eq: ["$isQuetion", false],
                                 },
                             ]
                             : isPodcast
                                 ? [
                                     {
-                                        $eq: ['$isPodcast', true],
+                                        $eq: ["$isPodcast", true],
                                     },
                                 ]
                                 : [
                                     {
-                                        $eq: ['$isQuetion', true],
+                                        $eq: ["$isQuetion", true],
                                     },
                                 ],
                     },
@@ -82,9 +82,9 @@ let CategoryService = class CategoryService {
                 $match: {
                     $expr: {
                         $regexMatch: {
-                            input: { $toString: '$name' },
+                            input: { $toString: "$name" },
                             regex: search,
-                            options: 'i',
+                            options: "i",
                         },
                     },
                 },
@@ -98,34 +98,34 @@ let CategoryService = class CategoryService {
                 $facet: {
                     total: [
                         {
-                            $count: 'createdAt',
+                            $count: "createdAt",
                         },
                     ],
                     data: [
                         {
                             $addFields: {
-                                _id: '$_id',
+                                _id: "$_id",
                             },
                         },
                     ],
                 },
             },
             {
-                $unwind: '$total',
+                $unwind: "$total",
             },
             {
                 $project: {
                     data: {
                         $slice: [
-                            '$data',
+                            "$data",
                             skip,
                             {
-                                $ifNull: [limit, '$total.createdAt'],
+                                $ifNull: [limit, "$total.createdAt"],
                             },
                         ],
                     },
                     meta: {
-                        total: '$total.createdAt',
+                        total: "$total.createdAt",
                         limit: {
                             $literal: limit,
                         },
@@ -134,7 +134,7 @@ let CategoryService = class CategoryService {
                         },
                         pages: {
                             $ceil: {
-                                $divide: ['$total.createdAt', limit],
+                                $divide: ["$total.createdAt", limit],
                             },
                         },
                     },
@@ -148,7 +148,7 @@ CategoryService = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.UseFilters)(new http_exception_filter_1.HttpExceptionFilter()),
     (0, common_1.UseInterceptors)(new logging_interceptor_1.LoggingInterceptor()),
-    __param(0, (0, mongoose_1.InjectModel)('category')),
+    __param(0, (0, mongoose_1.InjectModel)("category")),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], CategoryService);
 exports.CategoryService = CategoryService;

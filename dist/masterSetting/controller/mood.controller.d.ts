@@ -1,4 +1,4 @@
-import { MoodService } from '../services/mood.service';
+import { MoodService } from "../services/mood.service";
 export declare class MoodController {
     private readonly moodService;
     constructor(moodService: MoodService);

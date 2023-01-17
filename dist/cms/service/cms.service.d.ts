@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { cms } from '../interface/cms.interface';
+import { Model } from "mongoose";
+import { cms } from "../interface/cms.interface";
 export declare class CmsService {
     private readonly cmsModel;
     constructor(cmsModel: Model<cms>);

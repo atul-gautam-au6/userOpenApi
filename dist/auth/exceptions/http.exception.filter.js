@@ -16,7 +16,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const status = exception.getStatus();
         response.status(status).json({
             errorCode: status,
-            errorMessage: (exception === null || exception === void 0 ? void 0 : exception.message) || 'Internal server error',
+            errorMessage: (exception === null || exception === void 0 ? void 0 : exception.message) || "Internal server error",
             timestamp: new Date().toISOString(),
             path: request.url,
         });

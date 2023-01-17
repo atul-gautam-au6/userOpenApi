@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { location } from '../interface/location.interface';
+import { Model } from "mongoose";
+import { location } from "../interface/location.interface";
 export declare class LocationService {
     private readonly locationModel;
     constructor(locationModel: Model<location>);

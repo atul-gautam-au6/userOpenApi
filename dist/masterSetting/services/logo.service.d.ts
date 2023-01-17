@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { logo } from '../interface/logo.interface';
+import { Model } from "mongoose";
+import { logo } from "../interface/logo.interface";
 export declare class LogoService {
     private readonly serviceModel;
     constructor(serviceModel: Model<logo>);

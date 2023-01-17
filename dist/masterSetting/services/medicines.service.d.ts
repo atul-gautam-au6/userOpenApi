@@ -22,8 +22,8 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { Medicines } from '../interface/medicines.interface';
+import { Model } from "mongoose";
+import { Medicines } from "../interface/medicines.interface";
 export declare class MedicinesService {
     private readonly MedicinesModal;
     constructor(MedicinesModal: Model<Medicines>);

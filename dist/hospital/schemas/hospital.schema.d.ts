@@ -1,17 +1,17 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 declare const hospitalSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any, any>, {}, {}, {}, {}, "type", {
-    status: boolean;
     bannerImage: string;
     image: string;
-    location?: string;
+    status: boolean;
     name?: string;
-    description?: string;
     email?: string;
     phone?: number;
+    location?: string;
     point?: {
         enum: unknown[] | unknown[] | unknown[];
         type?: string;
         default?: unknown;
     };
+    description?: string;
 }>;
 export default hospitalSchema;
