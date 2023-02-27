@@ -6,9 +6,6 @@ import { join } from "path";
 import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { ResourcesModule } from "./resources/resources.module";
-import { MasterSettingModule } from "./masterSetting/masterSetting.module";
-import { CmsModule } from "./cms/cms.module";
-import { HospitalModule } from "./hospital/hospital.module";
 
 @Module({
   imports: [
@@ -22,9 +19,6 @@ import { HospitalModule } from "./hospital/hospital.module";
     UserModule,
     AuthModule,
     ResourcesModule,
-    // MasterSettingModule,
-    // CmsModule,
-    // HospitalModule,
   ],
   controllers: [],
 })
